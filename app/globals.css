@@ -1,26 +1,162 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/* ── Design Tokens ─────────────────────────────────────────── */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --bg-base: #07080f;
+  --bg-surface: #0e1017;
+  --bg-input: #1a1c27;
+
+  /* Borders */
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.38);
+  --text-dim: rgba(255, 255, 255, 0.2);
+
+  /* Accents */
+  --green: #5dcaa5;
+  --amber: #ef9f27;
+
+  /* Primary ramp */
+  --primary-50: #f5f4fb;
+  --primary-100: #e1def1;
+  --primary-200: #d3ceea;
+  --primary-300: #bfb7e1;
+  --primary-400: #b2a9db;
+  --primary-500: #9f94d2;
+  --primary-600: #9187bf;
+  --primary-700: #716995;
+  --primary-800: #575174;
+  --primary-900: #433e58;
+
+  /* Primary dark ramp */
+  --primary-dark-50: #e6e6e7;
+  --primary-dark-100: #b0b1b6;
+  --primary-dark-200: #8a8b92;
+  --primary-dark-300: #555660;
+  --primary-dark-400: #343541;
+  --primary-dark-500: #010312;
+  --primary-dark-600: #010310;
+  --primary-dark-700: #01020d;
+  --primary-dark-800: #01020a;
+  --primary-dark-900: #000108;
+
+  /* Semantic states */
+  --state-active: var(--primary-400);
+  --state-danger: #e24b4a;
+  --state-positive: var(--green);
+
+  /* Border radius */
+  --radius-button: 100px;
+  --radius-input: 12px;
+  --radius-card: 12px;
+  --radius-badge: 100px;
+  --radius-tab: 12px;
+  --radius-inner: 8px;
+
+  /* Spacing */
+  --section-gap: 120px;
+  --section-gap-tablet: 80px;
+  --section-gap-mobile: 60px;
+  --inner-gap-lg: 48px;
+  --inner-gap-md: 24px;
+  --inner-gap-sm: 12px;
+  --card-padding: 24px;
+  --card-padding-mobile: 16px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ── Base Styles ───────────────────────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
+  background-color: var(--bg-base);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography ────────────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-geist-pixel-square), monospace;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 64px;
+  line-height: 72px;
+  letter-spacing: -0.06em;
+}
+
+h2 {
+  font-size: 56px;
+  line-height: 64px;
+  letter-spacing: -0.04em;
+}
+
+h3 {
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.04em;
+}
+
+h4 {
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.04em;
+}
+
+h5 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.04em;
+}
+
+h6 {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+/* Mobile heading scale */
+@media (max-width: 744px) {
+  h1 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  h2 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  h3 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  h4 {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
