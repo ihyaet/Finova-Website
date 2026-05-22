@@ -1,65 +1,60 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+    <main className="flex flex-1 flex-col items-center justify-center min-h-screen bg-base px-5 md:px-10">
+      <div className="mx-auto w-full max-w-[1160px] flex flex-col items-center text-center gap-inner-md">
+
+        {/* Eyebrow */}
+        <span className="font-sans text-s uppercase tracking-widest text-[--text-muted]">
+          AI-Powered Finance
+        </span>
+
+        {/* Heading */}
+        <h1 className="font-pixel text-h1-mobile md:text-h1 text-[--text-primary] max-w-3xl">
+          The future of{" "}
+          <span className="text-green">Finance</span>{" "}
+          is here
+        </h1>
+
+        {/* Subheading */}
+        <p className="font-sans text-l text-[--text-secondary] max-w-xl">
+          Finova gives your finance team the intelligence to move faster, decide
+          smarter, and close stronger — powered by AI.
+        </p>
+
+        {/* CTA buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-2">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/sign-up"
+            className="inline-flex h-[44px] items-center justify-center rounded-button bg-white px-6 font-sans text-l font-medium text-base transition-opacity hover:opacity-90"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+            Get started free
           </a>
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/book-demo"
+            className="inline-flex h-[44px] items-center justify-center rounded-button border border-[--border-default] bg-transparent px-6 font-sans text-l text-[--text-secondary] transition-colors hover:border-[--border-hover] hover:bg-white/5"
           >
-            Documentation
+            Book a demo
           </a>
         </div>
-      </main>
-    </div>
+
+        {/* Metric strip */}
+        <div className="mt-inner-lg flex flex-col sm:flex-row gap-inner-md divide-y sm:divide-y-0 sm:divide-x divide-[--border-default] border border-[--border-default] rounded-card bg-surface px-card-pad py-inner-md w-full max-w-2xl">
+          {[
+            { value: "2×", label: "Faster close cycles" },
+            { value: "40%", label: "Reduction in manual work" },
+            { value: "99.9%", label: "Uptime SLA" },
+          ].map(({ value, label }) => (
+            <div
+              key={label}
+              className="flex flex-col items-center gap-inner-sm flex-1 px-inner-md"
+            >
+              <span className="font-pixel text-h4 text-green">{value}</span>
+              <span className="font-sans text-s text-[--text-muted]">{label}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </main>
   );
 }
