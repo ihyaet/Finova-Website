@@ -60,15 +60,34 @@
   --radius-tab: 12px;
   --radius-inner: 8px;
 
-  /* Spacing */
-  --section-gap: 120px;
-  --section-gap-tablet: 80px;
-  --section-gap-mobile: 60px;
-  --inner-gap-lg: 48px;
-  --inner-gap-md: 24px;
-  --inner-gap-sm: 12px;
-  --card-padding: 24px;
-  --card-padding-mobile: 16px;
+  /* Spacing scale — base unit 4px, all values are multiples of 4 */
+  --space-1:  0.25rem;  /*   4px */
+  --space-2:  0.5rem;   /*   8px */
+  --space-3:  0.75rem;  /*  12px */
+  --space-4:  1rem;     /*  16px */
+  --space-5:  1.25rem;  /*  20px */
+  --space-6:  1.5rem;   /*  24px */
+  --space-8:  2rem;     /*  32px */
+  --space-10: 2.5rem;   /*  40px */
+  --space-12: 3rem;     /*  48px */
+  --space-15: 3.75rem;  /*  60px */
+  --space-20: 5rem;     /*  80px */
+  --space-30: 7.5rem;   /* 120px */
+  --space-35: 8.75rem;  /* 140px */
+
+  /* Spacing tokens — semantic aliases mapped to scale */
+  --section-gap:     var(--space-30);  /* 120px desktop */
+  --inner-gap-lg:    var(--space-12);  /*  48px */
+  --inner-gap-md:    var(--space-6);   /*  24px */
+  --inner-gap-sm:    var(--space-3);   /*  12px */
+  --card-padding:    var(--space-6);   /*  24px */
+  --card-grid-gap:   var(--space-3);   /*  12px */
+  --page-margin:     var(--space-35);  /* 140px desktop */
+  --gutter:          var(--space-6);   /*  24px desktop */
+  --btn-group-gap:   var(--space-3);   /*  12px */
+  --icon-text-gap:   var(--space-2);   /*   8px */
+  --label-input-gap: 6px;              /*   6px — off-grid per spec */
+  --nav-item-gap:    var(--space-1);   /*   4px */
 }
 
 /* ── Base Styles ───────────────────────────────────────────── */
@@ -138,6 +157,105 @@ h6 {
   letter-spacing: -0.04em;
 }
 
+/* ── Body Text Scale ───────────────────────────────────────── */
+
+.text-xl,
+.text-xl-regular {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.text-xl-semibold {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.text-xl-medium {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.text-l,
+.text-l-regular {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.text-l-semibold {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.text-l-medium {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.text-m,
+.text-m-regular {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.text-m-semibold {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.text-m-medium {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.text-s,
+.text-s-regular {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.text-s-semibold {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.text-s-medium {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+/* Eyebrow / section label */
+.text-eyebrow {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
 /* Mobile heading scale */
 @media (max-width: 744px) {
   h1 {
@@ -160,3 +278,49 @@ h6 {
     line-height: 32px;
   }
 }
+
+/* ── Responsive Spacing Overrides ──────────────────────────── */
+
+@media (max-width: 744px) {
+  :root {
+    --section-gap:  var(--space-20);  /*  80px */
+    --page-margin:  var(--space-10);  /*  40px */
+    --gutter:       var(--space-4);   /*  16px */
+  }
+}
+
+@media (max-width: 393px) {
+  :root {
+    --section-gap:   var(--space-15); /*  60px */
+    --page-margin:   var(--space-5);  /*  20px */
+    --gutter:        var(--space-3);  /*  12px */
+    --card-padding:  var(--space-4);  /*  16px */
+    --card-grid-gap: var(--space-2);  /*   8px */
+  }
+}
+
+/* ── Layout Utilities ──────────────────────────────────────── */
+
+/* Centered content column — respects page margin per breakpoint */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--page-margin);
+}
+
+/* Full-width section with vertical rhythm */
+.section {
+  padding-block: var(--section-gap);
+}
+
+/* Gap utilities — use on flex/grid parents */
+.gap-section   { gap: var(--section-gap); }
+.gap-inner-lg  { gap: var(--inner-gap-lg); }
+.gap-inner-md  { gap: var(--inner-gap-md); }
+.gap-inner-sm  { gap: var(--inner-gap-sm); }
+.gap-card-grid { gap: var(--card-grid-gap); }
+.gap-btn-group { gap: var(--btn-group-gap); }
+.gap-icon-text { gap: var(--icon-text-gap); }
+.gap-label-input { gap: var(--label-input-gap); }
+.gap-nav-items { gap: var(--nav-item-gap); }

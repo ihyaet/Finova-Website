@@ -112,4 +112,4 @@ All copy is sourced from design screenshots. Sections listed below by name only 
 - Don't use emoji anywhere
 - Don't create modals or popups — all content is in-page
 - Don't assume mobile-first — desktop is the primary viewport, responsive is secondary
-- Don't forget the green accent color on "Finance" in the hero headline
+
