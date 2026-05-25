@@ -7,13 +7,10 @@ const ALERTS = [
 export function RiskPreview() {
   return (
     <div
-      className="w-full rounded-[20px] p-5 md:p-8"
-      style={{
-        background:
-          'radial-gradient(ellipse 110% 90% at 50% 0%, rgba(140, 110, 210, 0.45) 0%, rgba(87, 71, 140, 0.15) 45%, transparent 72%)',
-      }}
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat flex items-center justify-center px-40 py-20"
+      style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
     >
-      <div className="rounded-[14px] border border-[--border-default] bg-surface p-6 md:p-8 flex flex-col gap-6">
+      <div className="rounded-[12px] bg-primary-dark-500 p-6 flex flex-col gap-6 w-full h-full">
         <div className="grid grid-cols-3 gap-4">
           {[
             { label: 'Risk Score', value: '12', sub: 'Low risk' },

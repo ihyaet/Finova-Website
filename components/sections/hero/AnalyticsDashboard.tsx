@@ -32,22 +32,22 @@ export function AnalyticsDashboard() {
 
   return (
     <div
-      className="w-full rounded-[20px] p-5 md:p-8 bg-cover bg-center bg-no-repeat"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat flex items-center justify-center px-40 py-20"
       style={{
         backgroundImage: 'url(/assets/feature-bg.png)',
       }}
     >
-      <div className="rounded-[14px] bg-primary-dark-500 p-6 md:p-8 w-4/5 mx-auto">
+      <div className="rounded-[12px] bg-primary-dark-500 p-6 w-full h-full flex flex-col">
         {/* Period switcher */}
-        <div className="inline-flex items-center gap-1 rounded-full border border-[--border-default] bg-base p-1 mb-8">
+        <div className="inline-flex items-center gap-3 rounded-full mb-8">
           {(['6m', '1y'] as Period[]).map((p) => (
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-4 py-1.5 rounded-full font-sans text-s font-medium transition-colors ${
+              className={`px-4 py-1.5 rounded-full font-sans text-m font-medium transition-colors ${
                 period === p
                   ? 'bg-white text-base'
-                  : 'text-[--text-muted] hover:text-[--text-secondary]'
+                  : 'text-[--text-muted] hover:text-[--text-secondary] border border-white/20'
               }`}
             >
               {p === '6m' ? 'Last 6 Months' : 'Last Year'}
@@ -62,7 +62,7 @@ export function AnalyticsDashboard() {
             { label: 'Active accounts', value: d.accounts, trend: d.accTrend },
             { label: 'API uptime', value: d.uptime, trend: d.uptimeTrend },
           ].map(({ label, value, trend }) => (
-            <div key={label} className="flex flex-col gap-2">
+            <div key={label} className="flex flex-col gap-2 px-4 border-l border-white/10">
               <span className="font-sans text-s text-[--text-muted]">{label}</span>
               <span className="font-pixel text-h4 text-[--text-primary]">{value}</span>
               <span className="flex items-center gap-1 font-sans text-s text-green">
@@ -75,7 +75,7 @@ export function AnalyticsDashboard() {
 
         {/* Bar chart */}
         <div
-          className="flex items-end gap-2.5 h-36"
+          className="flex items-end gap-2.5 flex-1"
           onMouseLeave={() => setHoveredBar(null)}
         >
           {d.bars.map((h, i) => (

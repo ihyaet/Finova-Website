@@ -4,6 +4,10 @@ import { GeistPixelSquare } from 'geist/font/pixel'
 import './globals.css'
 import { AnnouncementRibbon } from '@/components/layout/AnnouncementRibbon'
 import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
+import { LenisContextProvider } from '@/components/providers/LenisContext'
+import { SmoothScroll } from '@/components/providers/SmoothScroll'
+import { LenisToggle } from '@/components/providers/LenisToggle'
 
 export const metadata: Metadata = {
   title: 'Finova — Financial Infrastructure for Modern Teams',
@@ -22,9 +26,15 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistPixelSquare.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-base">
-        <AnnouncementRibbon />
-        <Navbar />
-        <main className="flex flex-1 flex-col">{children}</main>
+        <LenisContextProvider>
+          <SmoothScroll>
+            <AnnouncementRibbon />
+            <Navbar />
+            <main className="flex flex-1 flex-col">{children}</main>
+            <Footer />
+          </SmoothScroll>
+          <LenisToggle />
+        </LenisContextProvider>
       </body>
     </html>
   )

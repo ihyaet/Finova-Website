@@ -1,14 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import {
   ChartLineUp,
   Code,
   ShieldCheck,
   Warning,
-  Medal,
 } from '@phosphor-icons/react'
+import { Button } from '@/components/ui/button'
 import { AnalyticsDashboard } from './AnalyticsDashboard'
 import { APIPreview } from './APIPreview'
 import { CompliancePreview } from './CompliancePreview'
@@ -30,21 +29,36 @@ const TAB_CONTENT: Record<TabId, React.ReactNode> = {
   risk: <RiskPreview />,
 }
 
+const TAB_DURATION = 12000
+
 export function Hero() {
   const [activeTab, setActiveTab] = useState<TabId>('analytics')
+
+  // Restart the 12s timer fresh on every tab change — manual or auto
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTab(prev => {
+        const idx = TABS.findIndex(t => t.id === prev)
+        return TABS[(idx + 1) % TABS.length].id
+      })
+    }, TAB_DURATION)
+    return () => clearInterval(timer)
+  }, [activeTab])
+
+  const handleTabClick = (id: TabId) => setActiveTab(id)
 
   return (
     <section className="w-full">
       <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
 
         {/* ── Two-column hero content ─────────────────────────── */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-16 pb-14">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-end pt-[160px] pb-24">
 
           {/* Left: badge + headline */}
           <div className="flex flex-col gap-5">
-            <div className="inline-flex w-fit items-center gap-2 rounded-badge border border-primary-400/20 bg-primary-400/10 px-3 py-1.5">
-              <Medal size={14} weight="fill" className="text-primary-400" aria-hidden="true" />
-              <span className="font-sans text-s font-medium uppercase tracking-widest text-primary-400">
+            <div className="inline-flex w-fit items-center gap-2 bg-primary-400/10 px-3 py-1 rounded-full">
+              <span className="w-1 h-[14px] rounded-[2px] bg-primary-400 shrink-0" />
+              <span className="font-sans text-m font-medium uppercase tracking-widest text-primary-400">
                 #1 Financial Architecture Platform
               </span>
             </div>
@@ -58,23 +72,13 @@ export function Hero() {
 
           {/* Right: description + CTAs */}
           <div className="flex flex-col gap-7">
-            <p className="font-sans text-xl text-[--text-secondary] max-w-md">
+            <p className="font-sans text-xl-regular text-[--text-secondary] max-w-full">
               Innovative solutions designed for fintech startups, financial
-              consultants, and investment firms — seamless, secure, and scalable.
+              consultants, and investment firms seamless, secure, and scalable.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/book-demo"
-                className="inline-flex h-[44px] items-center justify-center rounded-button bg-white px-6 font-sans text-l font-medium text-base transition-opacity hover:opacity-90"
-              >
-                Request Demo
-              </Link>
-              <Link
-                href="/sign-up"
-                className="inline-flex h-[44px] items-center justify-center rounded-button border border-white/20 bg-transparent px-6 font-sans text-l text-[--text-secondary] transition-colors hover:border-white/30 hover:bg-white/5"
-              >
-                Get Started
-              </Link>
+            <div className="flex items-center gap-3">
+              <Button variant="primary">Request Demo</Button>
+              <Button variant="secondary">Get Started</Button>
             </div>
           </div>
         </div>
@@ -93,10 +97,10 @@ export function Hero() {
                 role="tab"
                 aria-selected={active}
                 aria-controls={`tabpanel-${id}`}
-                onClick={() => setActiveTab(id)}
-                className={`flex-1 inline-flex justify-center items-center gap-2 px-5 pb-3.5 pt-1 font-sans text-l transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
+                onClick={() => handleTabClick(id)}
+                className={`relative flex-1 inline-flex justify-center items-center gap-2 px-5 pb-3.5 pt-1 font-sans text-l transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
                   active
-                    ? 'border-white text-white'
+                    ? 'border-white/20 text-white'
                     : 'border-white/30 text-white/70 hover:text-white/90 hover:border-white/50'
                 }`}
               >
@@ -104,6 +108,12 @@ export function Hero() {
                   <Icon size={16} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
                 </span>
                 {label}
+                {active && (
+                  <span
+                    key={activeTab}
+                    className="animate-tab-progress absolute bottom-[-2px] left-0 h-[2px] rounded-full bg-white"
+                  />
+                )}
               </button>
             )
           })}
@@ -117,6 +127,7 @@ export function Hero() {
               id={`tabpanel-${id}`}
               role="tabpanel"
               hidden={activeTab !== id}
+              className="h-[640px]"
             >
               {TAB_CONTENT[id]}
             </div>

@@ -1,5 +1,45 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 @config "../tailwind.config.ts";
+
+/* ── Logo marquee animation ────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ── Orbit / counter-rotate animations ─────────────────────── */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-orbit {
+  animation: orbit 30s linear infinite;
+}
+.animate-counter-rotate {
+  animation: orbit 30s linear infinite reverse;
+}
+
+/* ── Feature progress animation (vertical) ─────────────────── */
+@keyframes feature-progress {
+  from { height: 0%; }
+  to   { height: 100%; }
+}
+.animate-feature-progress {
+  animation: feature-progress 7s linear forwards;
+}
+
+/* ── Tab progress animation ────────────────────────────────── */
+@keyframes tab-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.animate-tab-progress {
+  animation: tab-progress 12s linear forwards;
+}
 
 /* ── Design Tokens ─────────────────────────────────────────── */
 
@@ -15,7 +55,7 @@
 
   /* Text */
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-secondary: rgba(255, 255, 255, 0.5);
   --text-muted: rgba(255, 255, 255, 0.38);
   --text-dim: rgba(255, 255, 255, 0.2);
 
