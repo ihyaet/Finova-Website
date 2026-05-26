@@ -8,6 +8,7 @@ import {
   Warning,
 } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
+import AsciiHero from '@/components/providers/ascii_hero'
 import { AnalyticsDashboard } from './AnalyticsDashboard'
 import { APIPreview } from './APIPreview'
 import { CompliancePreview } from './CompliancePreview'
@@ -48,7 +49,7 @@ export function Hero() {
   const handleTabClick = (id: TabId) => setActiveTab(id)
 
   return (
-    <section className="w-full">
+    <AsciiHero className="w-full" bgColor="#07080f">
       <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
 
         {/* ── Two-column hero content ─────────────────────────── */}
@@ -87,7 +88,7 @@ export function Hero() {
         <div
           role="tablist"
           aria-label="Product preview"
-          className="flex items-center gap-3 py-3"
+          className="flex items-center gap-3 py-3 w-full"
         >
           {TABS.map(({ id, label, Icon }) => {
             const active = activeTab === id
@@ -98,16 +99,16 @@ export function Hero() {
                 aria-selected={active}
                 aria-controls={`tabpanel-${id}`}
                 onClick={() => handleTabClick(id)}
-                className={`relative flex-1 inline-flex justify-center items-center gap-2 px-5 pb-3.5 pt-1 font-sans text-l transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
+                className={`relative ${active ? '' : 'flex-1'} inline-flex justify-center items-center gap-2 px-4 lg:px-5 pb-3.5 pt-1 font-sans text-l-medium lg:text-l transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
                   active
                     ? 'border-white/20 text-white'
                     : 'border-white/30 text-white/70 hover:text-white/90 hover:border-white/50'
                 }`}
               >
                 <span className={active ? 'text-primary-500' : ''}>
-                  <Icon size={16} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
+                  <Icon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
                 </span>
-                {label}
+                <span className={active ? '' : 'hidden lg:inline'}>{label}</span>
                 {active && (
                   <span
                     key={activeTab}
@@ -127,7 +128,7 @@ export function Hero() {
               id={`tabpanel-${id}`}
               role="tabpanel"
               hidden={activeTab !== id}
-              className="h-[640px]"
+              className="h-[440px] md:h-[540px] lg:h-[640px]"
             >
               {TAB_CONTENT[id]}
             </div>
@@ -135,6 +136,6 @@ export function Hero() {
         </div>
 
       </div>
-    </section>
+    </AsciiHero>
   )
 }

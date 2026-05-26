@@ -29,10 +29,10 @@ export function Testimonials() {
         </div>
 
         {/* ── 3-column cards ──────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+        <div className="flex lg:grid lg:grid-cols-3 gap-4 mb-12 overflow-x-auto lg:overflow-visible -mx-5 px-5 md:-mx-10 md:px-10 lg:mx-0 lg:px-0 pb-4 lg:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 
           {/* Card 1 — Stats (purple fill) */}
-          <div className="rounded-[16px] bg-primary-400 p-8 flex flex-col justify-between min-h-[420px]">
+          <div className="w-[300px] shrink-0 lg:w-auto rounded-[16px] bg-primary-400 p-8 flex flex-col justify-between lg:min-h-[420px]">
             <div className="flex flex-col gap-8">
               {STATS.map(({ value, label }) => (
                 <div key={label} className="flex flex-col gap-1">
@@ -54,7 +54,7 @@ export function Testimonials() {
           </div>
 
           {/* Card 2 — Quote */}
-          <div className="rounded-[16px] bg-[--bg-surface] border border-white/20 p-6 flex flex-col justify-between min-h-[440px]">
+          <div className="w-[300px] shrink-0 lg:w-auto rounded-[16px] bg-[--bg-surface] border border-white/20 p-6 flex flex-col justify-between lg:min-h-[440px]">
             <h5 className="leading-relaxed flex-1">
               "After thoroughly evaluating six different platforms, we ultimately decided on Finova.
               One of the standout features was the compliance tooling, which proved to be
@@ -87,7 +87,7 @@ export function Testimonials() {
           </div>
 
           {/* Card 3 — Photo / video */}
-          <div className="rounded-[16px] overflow-hidden relative min-h-[420px] bg-[--bg-surface]">
+          <div className="w-[300px] shrink-0 lg:w-auto rounded-[16px] overflow-hidden relative min-h-[260px] lg:min-h-[420px] bg-[--bg-surface]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=600"

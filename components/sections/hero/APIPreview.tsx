@@ -1,64 +1,121 @@
+'use client'
+
+import { useState } from 'react'
+
+const G = '#5DCAA5'                       // green — strings, flags
+const W = 'rgba(255,255,255,0.90)'        // white — commands, keys, numbers
+const D = 'rgba(255,255,255,0.35)'        // dim — punctuation
+
+type Span = { t: string; c: string }
+type Line = Span[]
+
+const ENDPOINTS: { method: 'GET' | 'POST'; path: string; lines: Line[] }[] = [
+  {
+    method: 'POST',
+    path: '/payments/initiate',
+    lines: [
+      [{ t: 'curl', c: G }, { t: ' -X ', c: G }, { t: 'POST', c: W }],
+      [{ t: 'https://api.finova.io/v1/payments/initiate', c: W }],
+      [{ t: '-H ', c: G }, { t: '"Authorization: Bearer $FINOVA_API_KEY"', c: G }],
+      [{ t: '-H ', c: G }, { t: '"Content-Type: application/json"', c: G }],
+      [{ t: "-d '", c: W }, { t: '{', c: D }],
+      [{ t: '  "amount"', c: W }, { t: ': ', c: D }, { t: '4500', c: W }, { t: ',', c: D }],
+      [{ t: '  "currency"', c: W }, { t: ': ', c: D }, { t: '"USD"', c: G }, { t: ',', c: D }],
+      [{ t: '  "recipient_id"', c: W }, { t: ': ', c: D }, { t: '"usr_9xKm2"', c: G }, { t: ',', c: D }],
+      [{ t: '  "idempotency_key"', c: W }, { t: ': ', c: D }, { t: '"inv_0029"', c: G }],
+      [{ t: "}'​", c: D }],
+    ],
+  },
+  {
+    method: 'POST',
+    path: '/risk/score',
+    lines: [
+      [{ t: 'curl', c: G }, { t: ' -X ', c: G }, { t: 'POST', c: W }],
+      [{ t: 'https://api.finova.io/v1/risk/score', c: W }],
+      [{ t: '-H ', c: G }, { t: '"Authorization: Bearer $FINOVA_API_KEY"', c: G }],
+      [{ t: '-H ', c: G }, { t: '"Content-Type: application/json"', c: G }],
+      [{ t: "-d '", c: W }, { t: '{', c: D }],
+      [{ t: '  "user_id"', c: W }, { t: ': ', c: D }, { t: '"usr_9xKm2"', c: G }, { t: ',', c: D }],
+      [{ t: '  "transaction_amount"', c: W }, { t: ': ', c: D }, { t: '4500', c: W }, { t: ',', c: D }],
+      [{ t: '  "country"', c: W }, { t: ': ', c: D }, { t: '"US"', c: G }],
+      [{ t: "}'​", c: D }],
+    ],
+  },
+  {
+    method: 'GET',
+    path: '/analytics/summary',
+    lines: [
+      [{ t: 'curl', c: G }, { t: ' -X ', c: G }, { t: 'GET', c: W }],
+      [{ t: 'https://api.finova.io/v1/analytics/summary', c: W }],
+      [{ t: '-H ', c: G }, { t: '"Authorization: Bearer $FINOVA_API_KEY"', c: G }],
+      [{ t: '-G ', c: G }, { t: '--data-urlencode ', c: W }],
+      [{ t: '  "period=', c: W }, { t: 'last_30_days', c: G }, { t: '"', c: W }],
+      [{ t: '--data-urlencode ', c: W }],
+      [{ t: '  "currency=', c: W }, { t: 'USD', c: G }, { t: '"', c: W }],
+    ],
+  },
+  {
+    method: 'GET',
+    path: '/accounts/:id',
+    lines: [
+      [{ t: 'curl', c: G }, { t: ' -X ', c: G }, { t: 'GET', c: W }],
+      [{ t: 'https://api.finova.io/v1/accounts/acc_7Xp2', c: W }],
+      [{ t: '-H ', c: G }, { t: '"Authorization: Bearer $FINOVA_API_KEY"', c: G }],
+      [{ t: '-H ', c: G }, { t: '"Accept: application/json"', c: G }],
+    ],
+  },
+]
+
+const METHOD_COLOR: Record<string, string> = {
+  POST: 'text-amber',
+  GET:  'text-green',
+}
+
 export function APIPreview() {
+  const [active, setActive] = useState(0)
+  const ep = ENDPOINTS[active]
+
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat flex items-center justify-center px-40 py-20"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:p-12"
       style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
     >
-      <div className="rounded-[12px] bg-primary-dark-500 p-6 flex flex-col gap-5 w-full h-full">
-        <div className="flex items-center justify-between">
-          <span className="font-sans text-s uppercase tracking-widest text-[--text-muted]">
-            API Reference
-          </span>
-          <span className="inline-flex items-center rounded-badge border border-green/20 bg-green/10 px-2.5 py-0.5 font-sans text-s text-green">
-            REST + GraphQL
-          </span>
-        </div>
+      <div className="rounded-[12px] bg-primary-dark-500 p-4 lg:p-6 flex flex-col gap-4 w-full h-full">
 
-        <div className="rounded-inner border border-[--border-default] bg-base p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="font-pixel text-s text-[--text-muted]">POST</span>
-            <span className="font-pixel text-s text-primary-400">/api/v1/transactions</span>
-          </div>
-          <div className="font-pixel text-s space-y-1">
-            <div>
-              <span className="text-primary-300">Authorization: </span>
-              <span className="text-[--text-secondary]">Bearer ••••••••••</span>
-            </div>
-            <div>
-              <span className="text-primary-300">Content-Type: </span>
-              <span className="text-[--text-secondary]">application/json</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-inner border border-[--border-default] bg-base p-4">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="font-pixel text-s text-green">200 OK</span>
-            <span className="font-pixel text-s text-[--text-muted]">18ms</span>
-          </div>
-          <div className="font-pixel text-s space-y-1">
-            <div><span className="text-primary-300">"id": </span><span className="text-green">"txn_01JFABCDEF"</span></div>
-            <div><span className="text-primary-300">"amount": </span><span className="text-[--text-secondary]">24800</span></div>
-            <div><span className="text-primary-300">"status": </span><span className="text-green">"completed"</span></div>
-            <div><span className="text-primary-300">"currency": </span><span className="text-[--text-secondary]">"USD"</span></div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { label: 'Endpoints', value: '47' },
-            { label: 'Avg response', value: '18ms' },
-            { label: 'SDKs', value: '12+' },
-          ].map(({ label, value }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center gap-1 rounded-inner border border-[--border-default] bg-base py-4"
+        {/* ── Endpoint pills ─────────────────────────────────── */}
+        <div className="flex items-center gap-2 flex-wrap">
+          {ENDPOINTS.map((e, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-sans text-s transition-colors ${
+                active === i
+                  ? 'border-white/20 bg-white/8 text-white'
+                  : 'border-white/10 bg-transparent text-white/40 hover:border-white/20 hover:text-white/70'
+              }`}
             >
-              <span className="font-pixel text-h5 text-primary-400">{value}</span>
-              <span className="font-sans text-s text-[--text-muted]">{label}</span>
-            </div>
+              <span className="font-medium">{e.method}</span>
+              <span>{e.path}</span>
+            </button>
           ))}
         </div>
+
+        {/* ── Code block ─────────────────────────────────────── */}
+        <div className="flex-1 rounded-inner bg-white/5 p-5 overflow-auto flex items-center justify-start">
+          <div
+            className="flex flex-col gap-0"
+            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '13px', lineHeight: '1.75', letterSpacing: '-0.04em' }}
+          >
+            {ep.lines.map((line, i) => (
+              <div key={i}>
+                {line.map((span, j) => (
+                  <span key={j} style={{ color: span.c }}>{span.t}</span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   )

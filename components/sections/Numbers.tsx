@@ -24,7 +24,7 @@ export function Numbers() {
       <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
 
         {/* ── Header ──────────────────────────────────────────── */}
-        <div className="flex items-end gap-12 lg:gap-16 mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-16 mb-16">
 
           {/* Left: badge + headline */}
           <div className="flex flex-col gap-5 flex-1">
@@ -42,7 +42,7 @@ export function Numbers() {
 
           {/* Right: description */}
     
-          <p className="font-sans text-xl text-[--text-secondary] w-[30%] shrink-0">
+          <p className="font-sans text-xl text-[--text-secondary] w-full lg:w-[30%] lg:shrink-0">
             Built for the future, our features provide the flexibility and
             security you need to succeed.
           </p>
@@ -50,7 +50,7 @@ export function Numbers() {
         </div>
 
         {/* ── Chart ───────────────────────────────────────────── */}
-        <div className="w-full px-24 mb-16">
+        <div className="w-full px-0 lg:px-24 mb-16">
           <svg
             viewBox={`0 0 ${W} ${H}`}
             preserveAspectRatio="none"

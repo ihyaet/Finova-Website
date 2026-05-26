@@ -32,42 +32,42 @@ export function AnalyticsDashboard() {
 
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat flex items-center justify-center px-40 py-20"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:p-12"
       style={{
         backgroundImage: 'url(/assets/feature-bg.png)',
       }}
     >
-      <div className="rounded-[12px] bg-primary-dark-500 p-6 w-full h-full flex flex-col">
+      <div className="rounded-[12px] bg-primary-dark-500 p-4 lg:p-6 w-full h-full flex flex-col">
         {/* Period switcher */}
-        <div className="inline-flex items-center gap-3 rounded-full mb-8">
+        <div className="inline-flex items-center gap-2 rounded-full mb-4">
           {(['6m', '1y'] as Period[]).map((p) => (
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-4 py-1.5 rounded-full font-sans text-m font-medium transition-colors ${
+              className={`px-3 py-1 rounded-full font-sans text-s font-medium transition-colors ${
                 period === p
                   ? 'bg-white text-base'
                   : 'text-[--text-muted] hover:text-[--text-secondary] border border-white/20'
               }`}
             >
-              {p === '6m' ? 'Last 6 Months' : 'Last Year'}
+              {p === '6m' ? '6 Months' : '1 Year'}
             </button>
           ))}
         </div>
 
         {/* Metrics */}
-        <div className="grid grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-3 gap-2 lg:gap-4 mb-4">
           {[
-            { label: 'Total revenue', value: d.revenue, trend: d.revTrend },
-            { label: 'Active accounts', value: d.accounts, trend: d.accTrend },
-            { label: 'API uptime', value: d.uptime, trend: d.uptimeTrend },
+            { label: 'Revenue',  value: d.revenue,  trend: d.revTrend    },
+            { label: 'Accounts', value: d.accounts, trend: d.accTrend    },
+            { label: 'Uptime',   value: d.uptime,   trend: d.uptimeTrend },
           ].map(({ label, value, trend }) => (
-            <div key={label} className="flex flex-col gap-2 px-4 border-l border-white/10">
-              <span className="font-sans text-s text-[--text-muted]">{label}</span>
-              <span className="font-pixel text-h4 text-[--text-primary]">{value}</span>
+            <div key={label} className="flex flex-col gap-1 px-2 lg:px-4 border-l border-white/10">
+              <span className="font-sans text-s text-[--text-muted] truncate">{label}</span>
+              <span className="font-pixel text-h6 lg:text-h5 text-[--text-primary]">{value}</span>
               <span className="flex items-center gap-1 font-sans text-s text-green">
-                <ArrowUpRight size={13} weight="bold" aria-hidden="true" />
-                {trend}
+                <ArrowUpRight size={11} weight="bold" aria-hidden="true" />
+                <span className="truncate text-[11px]">{trend}</span>
               </span>
             </div>
           ))}
@@ -75,7 +75,7 @@ export function AnalyticsDashboard() {
 
         {/* Bar chart */}
         <div
-          className="flex items-end gap-2.5 flex-1"
+          className="flex items-end gap-2.5 flex-1 min-h-[80px]"
           onMouseLeave={() => setHoveredBar(null)}
         >
           {d.bars.map((h, i) => (

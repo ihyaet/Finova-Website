@@ -1,47 +1,61 @@
-const CERTS = [
-  { label: 'SOC 2 Type II', status: 'Certified', date: 'Renewed Mar 2025' },
-  { label: 'PCI DSS Level 1', status: 'Certified', date: 'Renewed Jan 2025' },
-  { label: 'ISO 27001', status: 'Certified', date: 'Renewed Feb 2025' },
-  { label: 'GDPR', status: 'Compliant', date: 'Ongoing' },
-  { label: 'SOX Controls', status: 'Active', date: 'Ongoing' },
+const CHECKS = [
+  { label: 'KYC verification', status: 'Passed',       color: 'text-green' },
+  { label: 'AML screening',    status: 'Clear',         color: 'text-green' },
+  { label: 'GDPR consent',     status: 'Under Review',  color: 'text-amber' },
+]
+
+const AUDIT_LOG = [
+  { text: 'KYC passed for usr_7cPq1 — identity verified via document scan', time: '5 m ago' },
+  { text: 'GDPR consent flag raised — acct_11bX9 missing opt-in record',    time: '3 m ago' },
+  { text: 'AML screening cleared — txn_88aZ3k matched no watchlist entries', time: '10 m ago' },
+  { text: 'SOC 2 Type II — txn_4kF6J9 requires further investigation',       time: '2 m ago' },
 ]
 
 export function CompliancePreview() {
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat flex items-center justify-center px-40 py-20"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:p-12"
       style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
     >
-      <div className="rounded-[12px] bg-primary-dark-500 p-6 flex flex-col gap-5 w-full h-full">
-        <div className="flex items-center justify-between">
-          <span className="font-sans text-s uppercase tracking-widest text-[--text-muted]">
-            Compliance Status
-          </span>
-          <div className="flex items-center gap-2">
-            <span className="font-sans text-s text-[--text-muted]">Overall score</span>
-            <span className="font-pixel text-h5 text-green">98/100</span>
+      <div className="rounded-[12px] bg-primary-dark-500 p-4 lg:p-6 flex flex-col gap-4 lg:gap-5 w-full h-full overflow-hidden">
+
+        {/* ── Compliance checks ──────────────────────────────── */}
+        <div className="flex flex-col gap-3">
+          <span className="text-[--text-primary] opacity-40"
+            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '16px' }}>Compliance checks</span>
+          <div className="flex flex-col gap-2">
+            {CHECKS.map(({ label, status, color }) => (
+              <div
+                key={label}
+                className="flex items-center justify-between rounded-inner border border-white/20 px-3 py-[10px]"
+              >
+                <span className="font-sans text-[--text-primary]" style={{ fontSize: '14px' }}>{label}</span>
+                <span className={color} style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '14px' }}>{status}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          {CERTS.map(({ label, status, date }) => (
-            <div
-              key={label}
-              className="flex items-center justify-between rounded-inner border border-[--border-default] bg-base px-4 py-3"
-            >
-              <div className="flex items-center gap-3">
-                <span className="h-2 w-2 flex-shrink-0 rounded-full bg-green" />
-                <span className="font-sans text-l text-[--text-primary]">{label}</span>
+        {/* ── Recent audit log ───────────────────────────────── */}
+        <div className="flex flex-col gap-2 flex-1">
+          <span className="text-[--text-primary] opacity-40"
+            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '14px' }}>Recent audit log</span>
+          <div className="flex flex-col gap-1.5 flex-1">
+            {AUDIT_LOG.map(({ text, time }) => (
+              <div
+                key={text}
+                className="flex items-center gap-2 justify-between rounded-[8px] bg-white/5 px-3 py-[6px]"
+              >
+                <div className="flex items-center gap-2 flex-1 min-w-0">
+                  <span className="w-1 h-[12px] rounded-[2px] bg-primary-400 shrink-0" />
+                  <span className="font-sans text-[--text-secondary] truncate" style={{ fontSize: '12px' }}>{text}</span>
+                </div>
+                <span className="font-sans shrink-0 text-[--text-primary] opacity-50" style={{ fontSize: '11px' }}>{time}</span>
               </div>
-              <div className="flex items-center gap-4">
-                <span className="hidden sm:block font-sans text-s text-[--text-muted]">{date}</span>
-                <span className="inline-flex items-center rounded-badge border border-green/20 bg-green/10 px-2.5 py-0.5 font-sans text-s text-green">
-                  {status}
-                </span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
       </div>
     </div>
   )

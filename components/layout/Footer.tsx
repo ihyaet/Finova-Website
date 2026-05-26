@@ -84,7 +84,7 @@ export function Footer() {
       <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
 
         {/* ── Main grid ─────────────────────────────────────────── */}
-        <div className="flex flex-col md:flex-row md:justify-between gap-10 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-row lg:justify-between gap-10 py-16">
 
           {/* Contact column */}
           <div className="flex flex-col gap-6">

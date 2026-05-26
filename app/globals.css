@@ -22,6 +22,12 @@
 .animate-counter-rotate {
   animation: orbit 30s linear infinite reverse;
 }
+.animate-orbit-mid {
+  animation: orbit 22s linear infinite reverse;
+}
+.animate-counter-rotate-mid {
+  animation: orbit 22s linear infinite;
+}
 
 /* ── Feature progress animation (vertical) ─────────────────── */
 @keyframes feature-progress {
@@ -30,6 +36,15 @@
 }
 .animate-feature-progress {
   animation: feature-progress 7s linear forwards;
+}
+
+/* ── Why Finova card progress animation ────────────────────── */
+@keyframes why-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.animate-why-progress {
+  animation: why-progress 10s linear forwards;
 }
 
 /* ── Tab progress animation ────────────────────────────────── */

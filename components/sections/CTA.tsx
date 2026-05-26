@@ -2,15 +2,19 @@
 
 import { useState } from 'react'
 import { EnvelopeSimple } from '@phosphor-icons/react'
+import AsciiShader from '@/components/providers/ascii-shader'
 
-// Deterministic matrix texture — rows of varying-length "=" strings
-const MATRIX: string[][] = Array.from({ length: 9 }, (_, row) =>
-  Array.from({ length: 28 }, (_, col) => {
-    const seed = row * 37 + col * 13
-    const len  = (seed % 10) + 2
-    return '='.repeat(len)
-  })
-)
+const ASCII_CONFIG = {
+  cellSize: 9,
+  speed: 0.6,
+  waveFreq: 3,
+  waveIntensity: 0.5,
+  mouseRadius: 155,
+  flickerRate: 1,
+  noiseAmount: 0.5,
+  scanlines: 0,
+  charSet: "minimal" as const,
+}
 
 export function CTA() {
   const [email, setEmail] = useState('')
@@ -63,22 +67,17 @@ export function CTA() {
 
       </div>
 
-      {/* ── Matrix texture ──────────────────────────────────────── */}
-      <div className="w-full overflow-hidden px-6" aria-hidden="true">
-        <div className="flex flex-col gap-2">
-          {MATRIX.map((row, ri) => (
-            <div key={ri} className="flex gap-6 justify-between">
-              {row.map((cell, ci) => (
-                <span
-                  key={ci}
-                  className="font-pixel text-s text-white/[0.08] whitespace-nowrap"
-                >
-                  {cell}
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
+      {/* ── ASCII Shader texture ─────────────────────────────── */}
+      <div
+        className="relative w-full overflow-hidden"
+        style={{ height: 280 }}
+        aria-hidden="true"
+      >
+        <AsciiShader
+          config={ASCII_CONFIG}
+          svgScale={0.85}
+          className="absolute inset-0 w-full h-full mix-blend-exclusion"
+        />
       </div>
 
     </section>
