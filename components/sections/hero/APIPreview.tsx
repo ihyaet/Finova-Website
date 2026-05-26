@@ -103,8 +103,7 @@ export function APIPreview() {
         {/* ── Code block ─────────────────────────────────────── */}
         <div className="flex-1 rounded-inner bg-white/5 p-5 overflow-auto flex items-center justify-start">
           <div
-            className="flex flex-col gap-0"
-            className="text-[13px] lg:text-[18px]"
+            className="flex flex-col gap-0 text-[13px] lg:text-[18px]"
             style={{ fontFamily: 'Consolas, "Courier New", monospace', lineHeight: '1.75', letterSpacing: '-0.04em' }}
           >
             {ep.lines.map((line, i) => (
