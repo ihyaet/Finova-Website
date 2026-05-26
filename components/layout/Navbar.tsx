@@ -39,7 +39,7 @@ export function Navbar() {
     <header className="w-full sticky top-0 z-50">
 
       {/* ── Mobile / Tablet bar ──────────────────────────────── */}
-      <div className="flex lg:hidden items-center justify-between px-5 md:px-10 py-4 bg-[--bg-base]/90 backdrop-blur-xl border-b border-white/[0.06]">
+      <div className="flex lg:hidden items-center justify-between px-5 md:px-10 py-4 bg-[#010312]/20 backdrop-blur-xl border-b border-white/[0.06]">
         <Link href="/" className="shrink-0">
           <Image
             src="/assets/finova-logo.svg"

@@ -147,11 +147,11 @@ export function WhyFinova() {
                       transform:  'matrix(0.866025, -0.5, 0.866025, 0.5, 0, 0)',
                     }}
                   >
-                    <f.Icon size={60} weight="fill" className="text-primary-400" aria-hidden="true" />
+                    <f.Icon size={60} weight="fill" className="text-primary-400 w-8 h-8 md:w-11 md:h-11 lg:w-[60px] lg:h-[60px]" aria-hidden="true" />
                   </div>
                 ))}
                 {/* Placeholder to give the wrapper a size */}
-                <div className="w-[60px] h-[60px] opacity-0" />
+                <div className="w-8 h-8 md:w-11 md:h-11 lg:w-[60px] lg:h-[60px] opacity-0" />
               </div>
             </div>
           </div>

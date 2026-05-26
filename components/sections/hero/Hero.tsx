@@ -99,7 +99,7 @@ export function Hero() {
                 aria-selected={active}
                 aria-controls={`tabpanel-${id}`}
                 onClick={() => handleTabClick(id)}
-                className={`relative ${active ? '' : 'flex-1'} inline-flex justify-center items-center gap-2 px-4 lg:px-5 pb-3.5 pt-1 font-sans text-l-medium lg:text-l transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
+                className={`relative ${active ? 'lg:flex-1' : 'flex-1'} inline-flex justify-center items-center gap-2 px-4 lg:px-5 pb-3.5 pt-1 font-sans text-m-medium lg:text-l transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
                   active
                     ? 'border-white/20 text-white'
                     : 'border-white/30 text-white/70 hover:text-white/90 hover:border-white/50'

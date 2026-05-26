@@ -235,7 +235,7 @@ export function FeatureValue() {
         </div>
 
         {/* ── Sticky scroll layout ─────────────────────────────── */}
-        <div className="flex gap-8 pt-16 lg:pt-32">
+        <div className="flex gap-8">
 
           {/* Scroll indicator — sticky, desktop only */}
           <div className="hidden lg:flex sticky top-24 flex-col gap-3 h-fit shrink-0">
@@ -250,7 +250,7 @@ export function FeatureValue() {
           </div>
 
           {/* Content columns */}
-          <div className="flex flex-col lg:flex-row flex-1 gap-8 lg:gap-12">
+          <div className="flex flex-col lg:flex-row flex-1 gap-8 lg:gap-12 ">
 
             {/* Scrolling text + code column */}
             <div className="flex flex-col flex-1 gap-16 lg:gap-60">

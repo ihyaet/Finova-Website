@@ -77,7 +77,7 @@ export function APIPreview() {
 
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:p-12"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:py-12 lg:px-40"
       style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
     >
       <div className="rounded-[12px] bg-primary-dark-500 p-4 lg:p-6 flex flex-col gap-4 w-full h-full">
@@ -104,7 +104,8 @@ export function APIPreview() {
         <div className="flex-1 rounded-inner bg-white/5 p-5 overflow-auto flex items-center justify-start">
           <div
             className="flex flex-col gap-0"
-            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '13px', lineHeight: '1.75', letterSpacing: '-0.04em' }}
+            className="text-[13px] lg:text-[18px]"
+            style={{ fontFamily: 'Consolas, "Courier New", monospace', lineHeight: '1.75', letterSpacing: '-0.04em' }}
           >
             {ep.lines.map((line, i) => (
               <div key={i}>

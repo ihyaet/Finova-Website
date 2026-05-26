@@ -32,7 +32,7 @@ export function AnalyticsDashboard() {
 
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:p-12"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:py-12 lg:px-40"
       style={{
         backgroundImage: 'url(/assets/feature-bg.png)',
       }}

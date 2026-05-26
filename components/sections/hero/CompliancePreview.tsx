@@ -14,7 +14,7 @@ const AUDIT_LOG = [
 export function CompliancePreview() {
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:p-12"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:py-12 lg:px-40"
       style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
     >
       <div className="rounded-[12px] bg-primary-dark-500 p-4 lg:p-6 flex flex-col gap-4 lg:gap-5 w-full h-full overflow-hidden">
@@ -37,20 +37,22 @@ export function CompliancePreview() {
         </div>
 
         {/* ── Recent audit log ───────────────────────────────── */}
-        <div className="flex flex-col gap-2 flex-1">
-          <span className="text-[--text-primary] opacity-40"
-            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '14px' }}>Recent audit log</span>
-          <div className="flex flex-col gap-1.5 flex-1">
+        <div className="flex flex-col gap-2 lg:gap-3 flex-1">
+          <span
+            className="text-[--text-primary] opacity-40 text-[14px] lg:text-[16px]"
+            style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
+          >Recent audit log</span>
+          <div className="flex flex-col gap-1.5 lg:gap-2 flex-1">
             {AUDIT_LOG.map(({ text, time }) => (
               <div
                 key={text}
-                className="flex items-center gap-2 justify-between rounded-[8px] bg-white/5 px-3 py-[6px]"
+                className="flex items-center gap-2 lg:gap-3 justify-between rounded-[8px] bg-white/5 px-3 py-[6px] lg:py-[10px]"
               >
-                <div className="flex items-center gap-2 flex-1 min-w-0">
-                  <span className="w-1 h-[12px] rounded-[2px] bg-primary-400 shrink-0" />
-                  <span className="font-sans text-[--text-secondary] truncate" style={{ fontSize: '12px' }}>{text}</span>
+                <div className="flex items-center gap-2 lg:gap-3 flex-1 min-w-0">
+                  <span className="w-1 h-[12px] lg:h-[14px] rounded-[2px] bg-primary-400 shrink-0" />
+                  <span className="font-sans text-[--text-secondary] truncate text-[12px] lg:text-m">{text}</span>
                 </div>
-                <span className="font-sans shrink-0 text-[--text-primary] opacity-50" style={{ fontSize: '11px' }}>{time}</span>
+                <span className="font-sans shrink-0 text-[--text-primary] opacity-50 text-[11px] lg:text-[14px]">{time}</span>
               </div>
             ))}
           </div>

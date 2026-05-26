@@ -60,7 +60,7 @@ const AI_ICONS = [
 function FooterCol({ title, links }: { title: string; links: string[] }) {
   return (
     <div className="flex flex-col gap-5">
-      <h5 className="font-pixel text-h5 text-[--text-primary]">{title}</h5>
+      <h5 className="font-sans text-xl-regular text-[--text-primary]">{title}</h5>
       <div className="flex flex-col gap-3">
         {links.map(link => (
           <a
@@ -88,7 +88,7 @@ export function Footer() {
 
           {/* Contact column */}
           <div className="flex flex-col gap-6">
-            <h5 className="font-pixel text-h5 text-[--text-primary]">Contact</h5>
+            <h5 className="font-sans text-xl-regular text-[--text-primary]">Contact</h5>
 
             <div className="flex flex-col gap-2">
               <p className="font-sans text-l font-normal text-[--text-primary] opacity-50">
@@ -124,7 +124,7 @@ export function Footer() {
 
           {/* Follow us */}
           <div className="flex flex-col gap-5">
-            <h5 className="font-pixel text-h5 text-[--text-primary]">Follow us</h5>
+            <h5 className="font-sans text-xl-regular text-[--text-primary]">Follow us</h5>
             <div className="flex flex-col gap-3">
               {SOCIAL.map(({ label, Icon, href }) => (
                 <a
