@@ -33,16 +33,16 @@ export function RiskPreview() {
 
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:py-12 lg:px-40"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:py-12 md:px-20 lg:py-12 lg:px-40"
       style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
     >
-      <div className="rounded-[12px] bg-primary-dark-500 p-4 lg:p-6 w-full h-full flex flex-col items-center justify-center lg:flex-row lg:items-stretch gap-1 lg:gap-8">
+      <div className="rounded-[12px] bg-primary-dark-500 p-4 md:p-6 w-full h-full flex flex-col items-center justify-center md:flex-row md:items-stretch gap-1 md:gap-8">
 
         {/* ── Left: gauge + signals ────────────────────────── */}
-        <div className="flex flex-col w-full lg:w-[42%] lg:shrink-0 lg:justify-between">
+        <div className="flex flex-col w-full md:w-[42%] md:shrink-0 md:justify-between">
 
           {/* Circular gauge */}
-          <div className="flex items-center justify-center lg:flex-1 lg:mb-6">
+          <div className="flex items-center justify-center md:flex-1 md:mb-6">
             <div
               className="relative w-[180px] h-[180px] md:w-[210px] md:h-[210px] lg:w-[240px] lg:h-[240px]"
               style={{ overflow: 'visible' }}
@@ -62,15 +62,15 @@ export function RiskPreview() {
                 />
               </svg>
               {/* Center label */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 lg:gap-1">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 md:gap-1">
                 <span
-                  className="text-center leading-tight text-[--text-primary] opacity-40 text-[11px] lg:text-[13px]"
+                  className="text-center leading-tight text-[--text-primary] opacity-40 text-[11px] md:text-[13px]"
                   style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                 >
                   Overall risk score
                 </span>
-                <div className="flex items-baseline gap-0.5 lg:gap-1">
-                  <span className="font-pixel text-h6 lg:text-h5 text-[--text-primary]">{SCORE}</span>
+                <div className="flex items-baseline gap-0.5 md:gap-1">
+                  <span className="font-pixel text-h6 md:text-h4 text-[--text-primary]">{SCORE}</span>
                   <span className="font-sans text-s text-[--text-muted]">/100</span>
                 </div>
               </div>
@@ -78,16 +78,16 @@ export function RiskPreview() {
           </div>
 
           {/* Risk signals */}
-          <div className="flex flex-col gap-2 lg:gap-3 w-full">
+          <div className="flex flex-col gap-2 md:gap-3 w-full">
             <span
-              className="text-[--text-primary] opacity-40 text-[12px] lg:text-[14px]"
+              className="text-[--text-primary] opacity-40 text-[12px] md:text-[14px]"
               style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
             >
               Risk signals
             </span>
             {SIGNALS.map(({ label, value, color }) => (
               <div key={label} className="flex items-center gap-3">
-                <span className="font-sans text-s lg:text-m font-medium text-[--text-primary] w-14 lg:w-16">{label}</span>
+                <span className="font-sans text-s md:text-m font-medium text-[--text-primary] w-14 md:w-16">{label}</span>
                 <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
                   <div
                     className="h-full rounded-full"
@@ -102,8 +102,8 @@ export function RiskPreview() {
           </div>
         </div>
 
-        {/* ── Right: flagged transactions (desktop only) ───── */}
-        <div className="hidden lg:flex flex-col gap-3 flex-1 min-h-0">
+        {/* ── Right: flagged transactions ───── */}
+        <div className="hidden md:flex flex-col gap-3 flex-1 min-h-0">
           <span
             className="text-[--text-primary] opacity-40 shrink-0"
             style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '14px' }}

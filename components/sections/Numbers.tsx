@@ -21,7 +21,7 @@ const GRAD_ID = 'numbers-area-gradient'
 export function Numbers() {
   return (
     <section className="w-full py-24">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         {/* ── Header ──────────────────────────────────────────── */}
         <div className="flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-16 mb-16">
@@ -50,7 +50,7 @@ export function Numbers() {
         </div>
 
         {/* ── Chart ───────────────────────────────────────────── */}
-        <div className="w-full px-0 lg:px-24 mb-16">
+        <div className="w-full px-0 md:px-12 lg:px-24 mb-16">
           <svg
             viewBox={`0 0 ${W} ${H}`}
             preserveAspectRatio="none"
@@ -91,7 +91,7 @@ export function Numbers() {
         </div>
 
         {/* ── Stats bar ───────────────────────────────────────── */}
-        <div className="rounded-[16px] border border-white/20 bg-[--bg-surface] p-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="rounded-[16px] border border-white/20 bg-[--bg-surface] p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {STATS.map(({ value, label }) => (
             <div key={label} className="flex flex-col items-center justify-center gap-2">
               <span className="font-pixel text-h4 text-primary-400 leading-none">

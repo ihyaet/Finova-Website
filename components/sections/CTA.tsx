@@ -2,29 +2,17 @@
 
 import { useState } from 'react'
 import { EnvelopeSimple } from '@phosphor-icons/react'
-import AsciiShader from '@/components/providers/ascii-shader'
-
-const ASCII_CONFIG = {
-  cellSize: 9,
-  speed: 0.6,
-  waveFreq: 3,
-  waveIntensity: 0.5,
-  mouseRadius: 155,
-  flickerRate: 1,
-  noiseAmount: 0.5,
-  scanlines: 0,
-  charSet: "minimal" as const,
-}
+import FinovaAscii from '@/components/providers/finova_ascii_tsx'
 
 export function CTA() {
   const [email, setEmail] = useState('')
 
   return (
-    <section className="w-full py-24">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+    <section className="w-full pt-24 pb-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         {/* ── Content ─────────────────────────────────────────── */}
-        <div className="flex flex-col items-center text-center gap-6 mb-20">
+        <div className="flex flex-col items-center text-center gap-6 mb-16 w-full">
 
           {/* Badge */}
           <div className="inline-flex w-fit items-center gap-2 bg-primary-400/10 px-3 py-1 rounded-full">
@@ -41,12 +29,12 @@ export function CTA() {
           </h2>
 
           {/* Description */}
-          <p className="font-sans text-xl text-[--text-secondary] max-w-[560px]">
+          <p className="font-sans text-xl text-[--text-secondary] w-full md:max-w-[560px] md:line-clamp-1">
             Unlock the power of Finova's solutions and transform your financial operations today.
           </p>
 
           {/* Email form */}
-          <div className="flex items-center w-full max-w-[620px] bg-white/10 rounded-full pl-5 pr-2 py-2 gap-3">
+          <div className="flex items-center w-full md:max-w-[620px] bg-white/10 rounded-full pl-5 pr-2 py-2 gap-3">
             <EnvelopeSimple size={20} className="text-[--text-muted] shrink-0" aria-hidden="true" />
             <input
               type="email"
@@ -67,17 +55,9 @@ export function CTA() {
 
       </div>
 
-      {/* ── ASCII Shader texture ─────────────────────────────── */}
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ height: 280 }}
-        aria-hidden="true"
-      >
-        <AsciiShader
-          config={ASCII_CONFIG}
-          svgScale={0.85}
-          className="absolute inset-0 w-full h-full mix-blend-exclusion"
-        />
+      {/* ── Finova ASCII texture ─────────────────────────────── */}
+      <div className="w-full flex justify-center overflow-hidden h-[60px] sm:h-[80px] md:h-[110px] lg:h-[140px]" aria-hidden="true">
+        <FinovaAscii className="text-[5px] sm:text-[7px] md:text-[9px] lg:text-[11px]" />
       </div>
 
     </section>

@@ -47,7 +47,7 @@ function FeatureCard({ Icon, title, description, active, onClick }: FeatureCardP
   return (
     <button
       onClick={onClick}
-      className="flex flex-col gap-5 pt-8 border-t border-white/10 text-left w-full"
+      className="flex flex-col gap-5 pt-8 pb-6 lg:pb-0 border-t border-white/10 text-left w-full"
     >
       {/* Progress bar — only visible when active */}
       <div className="h-[2px] w-full rounded-full bg-white/10 -mt-8 mb-0 overflow-hidden">
@@ -70,7 +70,7 @@ function FeatureCard({ Icon, title, description, active, onClick }: FeatureCardP
       {/* Text */}
       <div className="flex flex-col gap-3">
         <h5 className="font-pixel text-[--text-primary]">{title}</h5>
-        <p className={`font-sans text-m transition-opacity duration-300 ${active ? 'text-[--text-secondary]' : 'text-[--text-secondary] opacity-50 hidden lg:block'}`}>
+        <p className={`font-sans text-m transition-opacity duration-300 ${active ? 'text-[--text-secondary]' : 'hidden md:block text-[--text-secondary] opacity-50'}`}>
           {description}
         </p>
       </div>
@@ -91,12 +91,12 @@ export function WhyFinova() {
 
   return (
     <section className="w-full py-24">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-12 lg:gap-16">
 
-          {/* ── Left features ───────────────────────────────────── */}
-          <div className="flex flex-col gap-16">
+          {/* ── Left features (desktop only) ───────────────────── */}
+          <div className="hidden lg:flex flex-col gap-16">
             {LEFT_FEATURES.map((f, i) => (
               <FeatureCard
                 key={f.title}
@@ -147,23 +147,35 @@ export function WhyFinova() {
                       transform:  'matrix(0.866025, -0.5, 0.866025, 0.5, 0, 0)',
                     }}
                   >
-                    <f.Icon size={60} weight="fill" className="text-primary-400 w-8 h-8 md:w-11 md:h-11 lg:w-[60px] lg:h-[60px]" aria-hidden="true" />
+                    <f.Icon size={60} weight="fill" className="text-primary-400 w-8 h-8 md:w-11 md:h-11 xl:w-[60px] xl:h-[60px]" aria-hidden="true" />
                   </div>
                 ))}
                 {/* Placeholder to give the wrapper a size */}
-                <div className="w-8 h-8 md:w-11 md:h-11 lg:w-[60px] lg:h-[60px] opacity-0" />
+                <div className="w-8 h-8 md:w-11 md:h-11 xl:w-[60px] xl:h-[60px] opacity-0" />
               </div>
             </div>
           </div>
 
-          {/* ── Right features ──────────────────────────────────── */}
-          <div className="flex flex-col gap-16">
+          {/* ── Right features (desktop only) ───────────────────── */}
+          <div className="hidden lg:flex flex-col gap-16">
             {RIGHT_FEATURES.map((f, i) => (
               <FeatureCard
                 key={f.title}
                 {...f}
                 active={active === i + 2}
                 onClick={() => setActive(i + 2)}
+              />
+            ))}
+          </div>
+
+          {/* ── Tablet / mobile: 2×2 merged grid ────────────────── */}
+          <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0">
+            {ALL_FEATURES.map((f, i) => (
+              <FeatureCard
+                key={f.title}
+                {...f}
+                active={active === i}
+                onClick={() => setActive(i)}
               />
             ))}
           </div>

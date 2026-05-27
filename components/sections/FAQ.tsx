@@ -32,7 +32,7 @@ export function FAQ() {
 
   return (
     <section className="w-full py-24">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
 

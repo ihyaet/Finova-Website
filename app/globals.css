@@ -336,6 +336,12 @@ h6 {
 
 /* ── Responsive Spacing Overrides ──────────────────────────── */
 
+@media (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    --page-margin: var(--space-20);  /*  80px — lg desktop */
+  }
+}
+
 @media (max-width: 744px) {
   :root {
     --section-gap:  var(--space-20);  /*  80px */

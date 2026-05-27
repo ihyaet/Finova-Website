@@ -20,10 +20,14 @@ const SCROLLED_CTA_SLOT  = 114
 
 export function Navbar() {
   const [scrolled,    setScrolled]    = useState(false)
+  const [atTop,       setAtTop]       = useState(true)
   const [mobileOpen,  setMobileOpen]  = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 30)
+      setAtTop(window.scrollY === 0)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -36,7 +40,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className="w-full sticky top-0 z-50">
+    <header className={`fixed w-full z-50 transition-[top] duration-300 ${atTop ? 'top-8' : 'top-0'}`}>
 
       {/* ── Mobile / Tablet bar ──────────────────────────────── */}
       <div className="flex lg:hidden items-center justify-between px-5 md:px-10 py-4 bg-[#010312]/20 backdrop-blur-xl border-b border-white/[0.06]">
@@ -91,7 +95,7 @@ export function Navbar() {
       {/* ── Desktop nav ──────────────────────────────────────── */}
       <nav
         aria-label="Main"
-        className="hidden lg:flex mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0 items-center justify-between py-4"
+        className="hidden lg:flex w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px] items-center justify-between py-4"
       >
         {/* External logo — fades out toward center on scroll */}
         <Link

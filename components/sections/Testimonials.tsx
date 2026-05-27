@@ -1,6 +1,7 @@
 'use client'
 
-import { Stack, Play } from '@phosphor-icons/react'
+import { Play } from '@phosphor-icons/react'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 
 const STATS = [
@@ -12,7 +13,7 @@ const STATS = [
 export function Testimonials() {
   return (
     <section className="w-full py-24">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         {/* ── Header ──────────────────────────────────────────── */}
         <div className="flex flex-col items-center gap-5 text-center mb-14">
@@ -32,7 +33,7 @@ export function Testimonials() {
         <div className="flex lg:grid lg:grid-cols-3 gap-4 mb-12 overflow-x-auto lg:overflow-visible -mx-5 px-5 md:-mx-10 md:px-10 lg:mx-0 lg:px-0 pb-4 lg:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 
           {/* Card 1 — Stats (purple fill) */}
-          <div className="w-[300px] shrink-0 lg:w-auto rounded-[16px] bg-primary-400 p-8 flex flex-col justify-between lg:min-h-[420px]">
+          <div className="w-[300px] shrink-0 lg:w-auto rounded-[16px] bg-primary-500 p-6 flex flex-col justify-between lg:min-h-[420px]">
             <div className="flex flex-col gap-8">
               {STATS.map(({ value, label }) => (
                 <div key={label} className="flex flex-col gap-1">
@@ -46,10 +47,9 @@ export function Testimonials() {
               ))}
             </div>
 
-            {/* Dummy logo */}
-            <div className="flex items-center gap-2 mt-6">
-              <Stack size={18} weight="fill" className="text-primary-dark-400" aria-hidden="true" />
-              <span className="font-sans text-l-medium text-primary-dark-400">Pallet</span>
+            {/* Logo */}
+            <div className="mt-6">
+              <Image src="/assets/pallet-logo.svg" alt="Pallet" width={24} height={24} className="h-6 w-auto brightness-0 opacity-40" />
             </div>
           </div>
 
@@ -76,21 +76,15 @@ export function Testimonials() {
                 </div>
               </div>
 
-              {/* Dummy logo */}
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full border border-white/30 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
-                </div>
-                <span className="font-sans text-m text-[--text-muted]">Palantir</span>
-              </div>
+              {/* Logo */}
+              <Image src="/assets/palantir-logo.svg" alt="Palantir" width={24} height={24} className="h-6 w-[50%] object-contain object-left brightness-0 invert opacity-50" />
             </div>
           </div>
 
           {/* Card 3 — Photo / video */}
           <div className="w-[300px] shrink-0 lg:w-auto rounded-[16px] overflow-hidden relative min-h-[260px] lg:min-h-[420px] bg-[--bg-surface]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=600"
+              src="/assets/testi-img.png"
               alt="Customer story"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -105,11 +99,9 @@ export function Testimonials() {
               </div>
             </div>
 
-            {/* Dummy logo */}
+            {/* Logo */}
             <div className="absolute bottom-6 left-6">
-              <span className="font-sans text-m-medium text-white/60 uppercase tracking-widest">
-                Decagon
-              </span>
+              <Image src="/assets/decagon-logo.svg" alt="Decagon" width={24} height={24} className="h-6 w-auto brightness-0 invert opacity-50" />
             </div>
           </div>
 

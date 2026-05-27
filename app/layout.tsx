@@ -7,7 +7,6 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { LenisContextProvider } from '@/components/providers/LenisContext'
 import { SmoothScroll } from '@/components/providers/SmoothScroll'
-import { LenisToggle } from '@/components/providers/LenisToggle'
 
 export const metadata: Metadata = {
   title: 'Finova — Financial Infrastructure for Modern Teams',
@@ -28,12 +27,13 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-base">
         <LenisContextProvider>
           <SmoothScroll>
-            <AnnouncementRibbon />
-            <Navbar />
-            <main className="flex flex-1 flex-col">{children}</main>
-            <Footer />
+            <div className="w-full flex flex-col min-h-screen">
+              <AnnouncementRibbon />
+              <Navbar />
+              <main className="flex flex-1 flex-col">{children}</main>
+              <Footer />
+            </div>
           </SmoothScroll>
-          <LenisToggle />
         </LenisContextProvider>
       </body>
     </html>

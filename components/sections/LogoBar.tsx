@@ -14,7 +14,7 @@ const LOGOS = [
 export function LogoBar() {
   return (
     <section className="w-full py-16">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         <p className="text-center font-sans text-m text-[--text-muted] mb-10">
           Trusted by Leading Financial Innovators
@@ -23,7 +23,7 @@ export function LogoBar() {
       </div>
 
       {/* Carousel — constrained to same max-width as other sections */}
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
       <div className="relative w-full overflow-hidden">
 
         {/* Left fade overlay */}

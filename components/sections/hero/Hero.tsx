@@ -50,10 +50,10 @@ export function Hero() {
 
   return (
     <AsciiHero className="w-full" bgColor="#07080f">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         {/* ── Two-column hero content ─────────────────────────── */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-end pt-[160px] pb-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-end pt-[240px] pb-24">
 
           {/* Left: badge + headline */}
           <div className="flex flex-col gap-5">
@@ -99,16 +99,16 @@ export function Hero() {
                 aria-selected={active}
                 aria-controls={`tabpanel-${id}`}
                 onClick={() => handleTabClick(id)}
-                className={`relative ${active ? 'lg:flex-1' : 'flex-1'} inline-flex justify-center items-center gap-2 px-4 lg:px-5 pb-3.5 pt-1 font-sans text-m-medium lg:text-l transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
+                className={`relative ${active ? 'md:flex-1' : 'flex-1'} inline-flex justify-center items-center gap-2 px-4 lg:px-5 pb-3.5 pt-1 font-sans text-m-medium lg:text-l-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 border-b-2 -mb-px ${
                   active
                     ? 'border-white/20 text-white'
                     : 'border-white/30 text-white/70 hover:text-white/90 hover:border-white/50'
                 }`}
               >
                 <span className={active ? 'text-primary-500' : ''}>
-                  <Icon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
+                  <Icon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" className="lg:w-6 lg:h-6" />
                 </span>
-                <span className={active ? '' : 'hidden lg:inline'}>{label}</span>
+                <span className={active ? '' : 'hidden md:inline'}>{label}</span>
                 {active && (
                   <span
                     key={activeTab}

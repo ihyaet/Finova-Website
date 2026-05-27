@@ -98,18 +98,18 @@ function PreviewContent({ index }: { index: number }) {
 
   if (index === 0) {
     return (
-      <div className="relative w-full rounded-[8px] p-5 lg:p-6 flex flex-col gap-5 z-10" style={{ backgroundColor: '#1A1C29' }}>
+      <div className="relative w-full rounded-[8px] p-4 md:p-5 flex flex-col gap-3 md:gap-4 lg:gap-5 z-10" style={{ backgroundColor: '#1A1C29' }}>
         <div className="flex justify-center">
-          <div className="w-12 h-12 rounded-[10px] bg-primary-dark-400 flex items-center justify-center">
-            <feat.icon size={22} className="text-primary-400" aria-hidden="true" />
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-[10px] bg-primary-dark-400 flex items-center justify-center">
+            <feat.icon size={20} className="text-primary-400 md:w-[22px] md:h-[22px]" aria-hidden="true" />
           </div>
         </div>
         <div className="border-t border-dashed border-[--border-default] opacity-20" />
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2 md:gap-3 lg:gap-4">
           {feat.rows.map(({ label, value, accent }) => (
             <div key={label} className="flex items-center justify-between">
-              <span className="font-sans text-m text-[--text-muted]">{label}</span>
-              <span className={`font-pixel text-m ${accent ? 'text-green' : 'text-[--text-primary]'}`}>{value}</span>
+              <span className="font-sans text-s md:text-m text-[--text-muted]">{label}</span>
+              <span className={`font-pixel text-s md:text-m ${accent ? 'text-green' : 'text-[--text-primary]'}`}>{value}</span>
             </div>
           ))}
         </div>
@@ -119,20 +119,20 @@ function PreviewContent({ index }: { index: number }) {
 
   if (index === 1) {
     return (
-      <div className="relative w-full flex flex-col gap-3 z-10 items-center">
-        <div className="w-[80%] h-10 rounded-[8px] bg-primary-dark-400 opacity-60" />
+      <div className="relative w-full flex flex-col gap-2 lg:gap-3 z-10 items-center">
+        <div className="w-[80%] h-8 lg:h-10 rounded-[8px] bg-primary-dark-400 opacity-60" />
         {[
           { event: 'payment.settled', detail: 'txn_88aZ3k', time: '5 m ago',  accent: 'bg-primary-400' },
           { event: 'risk.flag',       detail: 'acct_11bX9',  time: '3 m ago',  accent: 'bg-green'       },
           { event: 'kyc.passed',      detail: 'usr_7cPq1',   time: '10 m ago', accent: 'bg-amber'       },
         ].map(({ event, detail, time, accent }) => (
-          <div key={event} className="flex items-center gap-3 rounded-[8px] bg-primary-dark-400 px-4 py-3 w-full">
-            <span className={`w-1 h-[18px] rounded-full shrink-0 ${accent}`} />
-            <span className="font-sans text-m text-[--text-primary] flex-1 min-w-0 truncate">{event} — {detail}</span>
-            <span className="font-sans text-m text-[--text-muted] shrink-0">{time}</span>
+          <div key={event} className="flex items-center gap-2 lg:gap-3 rounded-[8px] bg-primary-dark-400 px-3 py-2 lg:px-4 lg:py-3 w-full">
+            <span className={`w-1 h-[14px] lg:h-[18px] rounded-full shrink-0 ${accent}`} />
+            <span className="font-sans text-s lg:text-m text-[--text-primary] flex-1 min-w-0 truncate">{event} — {detail}</span>
+            <span className="font-sans text-s lg:text-m text-[--text-muted] shrink-0">{time}</span>
           </div>
         ))}
-        <div className="w-[80%] h-10 rounded-[8px] bg-primary-dark-400 opacity-60" />
+        <div className="w-[80%] h-8 lg:h-10 rounded-[8px] bg-primary-dark-400 opacity-60" />
       </div>
     )
   }
@@ -155,7 +155,7 @@ function PreviewContent({ index }: { index: number }) {
           Analytic Summary
         </span>
         <div className="flex justify-center">
-          <div className="relative w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] lg:w-[240px] lg:h-[240px]">
+          <div className="relative w-[140px] h-[140px] md:w-[180px] md:h-[180px] lg:w-[240px] lg:h-[240px]">
             <svg width="100%" height="100%" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" style={{ display: 'block' }}>
               <circle cx={CX} cy={CX} r={R} fill="none" stroke="#b2a9db" strokeWidth="12" strokeLinecap="round"
                 strokeDasharray={`${pLen} ${C - pLen}`} strokeDashoffset={pOff} />
@@ -165,7 +165,7 @@ function PreviewContent({ index }: { index: number }) {
                 strokeDasharray={`${oLen} ${C - oLen}`} strokeDashoffset={oOff} />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-pixel text-h5 text-[--text-primary]">$ 1.4M</span>
+              <span className="font-pixel text-h5 lg:text-h4 text-[--text-primary]">$ 1.4M</span>
             </div>
           </div>
         </div>
@@ -175,9 +175,9 @@ function PreviewContent({ index }: { index: number }) {
             { label: 'Transfers', value: '$840K', color: 'text-amber'       },
             { label: 'Payouts',   value: '$360K', color: 'text-green'       },
           ].map(({ label, value, color }) => (
-            <div key={label} className="flex items-center justify-between py-3 border-b border-white/[0.06]">
-              <span className="font-sans text-m text-[--text-primary]">{label}</span>
-              <span className={`font-pixel text-m ${color}`}>{value}</span>
+            <div key={label} className="flex items-center justify-between py-2 md:py-3 border-b border-white/[0.06]">
+              <span className="font-sans text-s md:text-m text-[--text-primary]">{label}</span>
+              <span className={`font-pixel text-s md:text-m ${color}`}>{value}</span>
             </div>
           ))}
         </div>
@@ -213,10 +213,10 @@ export function FeatureValue() {
 
   return (
     <section className="w-full py-16 lg:py-24">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         {/* ── Section header ───────────────────────────────────── */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-end mb-16 lg:mb-32">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end mb-16 md:mb-32">
           <div className="flex flex-col gap-5">
             <div className="inline-flex w-fit items-center gap-2 bg-primary-400/10 px-3 py-1 rounded-full">
               <span className="w-1 h-[14px] rounded-[2px] bg-primary-400 shrink-0" />
@@ -238,7 +238,7 @@ export function FeatureValue() {
         <div className="flex gap-8">
 
           {/* Scroll indicator — sticky, desktop only */}
-          <div className="hidden lg:flex sticky top-24 flex-col gap-3 h-fit shrink-0">
+          <div className="hidden lg:flex sticky top-64 flex-col gap-3 h-fit shrink-0">
             {FEATURES.map((_, i) => (
               <div
                 key={i}
@@ -250,25 +250,25 @@ export function FeatureValue() {
           </div>
 
           {/* Content columns */}
-          <div className="flex flex-col lg:flex-row flex-1 gap-8 lg:gap-12 ">
+          <div className="flex flex-col md:flex-row flex-1 gap-8 md:gap-12">
 
             {/* Scrolling text + code column */}
-            <div className="flex flex-col flex-1 gap-16 lg:gap-60">
+            <div className="flex flex-col flex-1 gap-16 md:gap-60">
               {FEATURES.map((feat, i) => (
                 <div
                   key={feat.title}
                   ref={el => { sectionRefs.current[i] = el }}
-                  className="w-full flex flex-col gap-8 lg:aspect-square lg:justify-between"
+                  className="w-full flex flex-col gap-8 md:aspect-square md:justify-between"
                 >
                   {/* Title + description */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-pixel text-h5 text-[--text-primary]">{feat.title}</h3>
-                    <p className="font-sans text-m text-[--text-muted] leading-relaxed">{feat.description}</p>
+                    <h4 className="font-pixel text-h5 md:text-h4 lg:text-h3 text-[--text-primary]">{feat.title}</h4>
+                    <p className="font-sans text-l-regular text-white/50 leading-relaxed">{feat.description}</p>
                   </div>
 
                   {/* Code block */}
                   <div
-                    className="rounded-[12px] border border-white/20 p-4 lg:p-6 text-[13px] lg:text-[18px]"
+                    className="rounded-[12px] border border-white/20 p-4 md:p-6 text-[13px] lg:text-[18px]"
                     style={{ fontFamily: 'Consolas, monospace' }}
                   >
                     <div className="flex items-center gap-3 mb-4">
@@ -300,17 +300,11 @@ export function FeatureValue() {
 
                   {/* Mobile / tablet inline preview — hidden on desktop */}
                   <div
-                    className="block lg:hidden rounded-[12px] bg-cover bg-center bg-no-repeat p-5"
+                    className="block md:hidden rounded-[12px] bg-cover bg-center bg-no-repeat p-5"
                     style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
                   >
-                    <div className="w-full rounded-[12px] bg-primary-dark-500 p-5 flex flex-col items-center justify-center overflow-visible">
-                      <div className={`relative ${i === 0 ? 'w-[80%] pb-8' : 'w-full'}`}>
-                        {i === 0 && (
-                          <div
-                            className="absolute -bottom-[20px] inset-x-[4%] h-full rounded-[8px] z-0 opacity-50"
-                            style={{ backgroundColor: '#1A1C29' }}
-                          />
-                        )}
+                    <div className="w-full aspect-square rounded-[12px] bg-primary-dark-500 p-5 flex flex-col items-center justify-center overflow-hidden">
+                      <div className="relative w-full">
                         <PreviewContent index={i} />
                       </div>
                     </div>
@@ -321,21 +315,21 @@ export function FeatureValue() {
             </div>
 
             {/* Sticky preview card column — desktop only */}
-            <div className="hidden lg:block flex-1">
-              <div className="sticky top-24">
+            <div className="hidden md:block flex-1">
+              <div className="sticky top-64">
                 <div
-                  className="w-full aspect-square rounded-[12px] bg-cover bg-center bg-no-repeat p-10"
+                  className="w-full aspect-square rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-6 lg:p-10"
                   style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
                 >
-                  <div className="w-full h-full rounded-[12px] bg-primary-dark-500 p-8 m-0 flex flex-col items-center justify-center overflow-hidden">
+                  <div className="w-full h-full rounded-[12px] bg-primary-dark-500 p-4 md:p-6 lg:p-8 m-0 flex flex-col items-center justify-center overflow-hidden">
 
                     {/* Stack wrapper */}
-                    <div className={`relative ${active === 0 ? 'w-[80%]' : 'w-full'}`}>
+                    <div className={`relative ${active === 0 ? 'lg:w-[80%] w-full' : 'w-full'}`}>
 
-                      {/* Back stack card — only for feature 0 */}
+                      {/* Back stack card — only for feature 0 on desktop */}
                       {active === 0 && (
                         <div
-                          className="absolute -bottom-[24px] left-[14%] right-[14%] h-full rounded-[8px] z-0 opacity-50"
+                          className="hidden lg:block absolute -bottom-[24px] left-[14%] right-[14%] h-full rounded-[8px] z-0 opacity-50"
                           style={{ backgroundColor: '#1A1C29' }}
                         />
                       )}

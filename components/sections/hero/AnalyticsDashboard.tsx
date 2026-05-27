@@ -32,7 +32,7 @@ export function AnalyticsDashboard() {
 
   return (
     <div
-      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-8 lg:py-12 lg:px-40"
+      className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:py-12 md:px-20 lg:py-12 lg:px-40"
       style={{
         backgroundImage: 'url(/assets/feature-bg.png)',
       }}
@@ -64,7 +64,7 @@ export function AnalyticsDashboard() {
           ].map(({ label, value, trend }) => (
             <div key={label} className="flex flex-col gap-1 px-2 lg:px-4 border-l border-white/10">
               <span className="font-sans text-s text-[--text-muted] truncate">{label}</span>
-              <span className="font-pixel text-h6 lg:text-h5 text-[--text-primary]">{value}</span>
+              <span className="font-pixel text-h6 md:text-h4 text-[--text-primary]">{value}</span>
               <span className="flex items-center gap-1 font-sans text-s text-green">
                 <ArrowUpRight size={11} weight="bold" aria-hidden="true" />
                 <span className="truncate text-[11px]">{trend}</span>

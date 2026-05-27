@@ -81,7 +81,7 @@ function FooterCol({ title, links }: { title: string; links: string[] }) {
 export function Footer() {
   return (
     <footer className="w-full bg-[--bg-base]">
-      <div className="mx-auto w-full max-w-[1160px] px-5 md:px-10 lg:px-0">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
 
         {/* ── Main grid ─────────────────────────────────────────── */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-row lg:justify-between gap-10 py-16">
@@ -159,7 +159,7 @@ export function Footer() {
         </div>
 
         {/* ── Bottom bar ──────────────────────────────────────────── */}
-        <div className="py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="font-sans text-m text-[--text-secondary]">
             Copyright © 2026 Finova
           </span>
