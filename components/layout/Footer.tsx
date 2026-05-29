@@ -7,6 +7,7 @@ import {
   LinkedinLogo,
   GithubLogo,
 } from '@phosphor-icons/react'
+import { Reveal } from '@/components/ui/Reveal'
 
 /* ── Data ──────────────────────────────────────────────────── */
 
@@ -57,22 +58,23 @@ const AI_ICONS = [
 
 /* ── Sub-components ────────────────────────────────────────── */
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({ title, links, delay = 0 }: { title: string; links: string[]; delay?: number }) {
   return (
-    <div className="flex flex-col gap-5">
+    <Reveal delay={delay} className="flex flex-col gap-5">
       <h5 className="font-sans text-xl-regular text-[--text-primary]">{title}</h5>
       <div className="flex flex-col gap-3">
-        {links.map(link => (
-          <a
-            key={link}
-            href="#"
-            className="font-sans text-l font-normal text-[--text-primary] opacity-50 hover:opacity-100 transition-opacity"
-          >
-            {link}
-          </a>
+        {links.map((link, i) => (
+          <Reveal key={link} delay={delay + 80 + i * 40}>
+            <a
+              href="#"
+              className="font-sans text-l font-normal text-[--text-primary] opacity-50 hover:opacity-100 transition-opacity"
+            >
+              {link}
+            </a>
+          </Reveal>
         ))}
       </div>
-    </div>
+    </Reveal>
   )
 }
 
@@ -87,19 +89,25 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-row lg:justify-between gap-10 py-16">
 
           {/* Contact column */}
-          <div className="flex flex-col gap-6">
+          <Reveal className="flex flex-col gap-6">
             <h5 className="font-sans text-xl-regular text-[--text-primary]">Contact</h5>
 
             <div className="flex flex-col gap-2">
-              <p className="font-sans text-l font-normal text-[--text-primary] opacity-50">
-                123 Finova Street, City, State, ZIP Code
-              </p>
-              <p className="font-sans text-l font-normal text-[--text-primary] opacity-50">+1 (123) 456-7890</p>
-              <p className="font-sans text-l font-normal text-[--text-primary] opacity-50">support@finova.com</p>
+              <Reveal delay={80}>
+                <p className="font-sans text-l font-normal text-[--text-primary] opacity-50">
+                  123 Finova Street, City, State, ZIP Code
+                </p>
+              </Reveal>
+              <Reveal delay={120}>
+                <p className="font-sans text-l font-normal text-[--text-primary] opacity-50">+1 (123) 456-7890</p>
+              </Reveal>
+              <Reveal delay={160}>
+                <p className="font-sans text-l font-normal text-[--text-primary] opacity-50">support@finova.com</p>
+              </Reveal>
             </div>
 
             {/* AI summary */}
-            <div className="flex flex-col gap-3">
+            <Reveal delay={200} className="flex flex-col gap-3">
               <span className="font-sans text-l text-[--text-muted]">
                 Get an AI summary of this page
               </span>
@@ -114,35 +122,36 @@ export function Footer() {
                   </button>
                 ))}
               </div>
-            </div>
-          </div>
+            </Reveal>
+          </Reveal>
 
-          {/* Nav columns */}
-          {NAV_COLS.map(col => (
-            <FooterCol key={col.title} {...col} />
+          {/* Nav columns — stagger each column by 80ms */}
+          {NAV_COLS.map((col, i) => (
+            <FooterCol key={col.title} {...col} delay={i * 80} />
           ))}
 
           {/* Follow us */}
-          <div className="flex flex-col gap-5">
+          <Reveal delay={320} className="flex flex-col gap-5">
             <h5 className="font-sans text-xl-regular text-[--text-primary]">Follow us</h5>
             <div className="flex flex-col gap-3">
-              {SOCIAL.map(({ label, Icon, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="inline-flex items-center gap-2 font-sans text-l font-normal text-[--text-primary] opacity-50 hover:opacity-100 transition-opacity"
-                >
-                  <Icon size={16} aria-hidden="true" />
-                  {label}
-                </a>
+              {SOCIAL.map(({ label, Icon, href }, i) => (
+                <Reveal key={label} delay={400 + i * 40}>
+                  <a
+                    href={href}
+                    className="inline-flex items-center gap-2 font-sans text-l font-normal text-[--text-primary] opacity-50 hover:opacity-100 transition-opacity"
+                  >
+                    <Icon size={16} aria-hidden="true" />
+                    {label}
+                  </a>
+                </Reveal>
               ))}
             </div>
-          </div>
+          </Reveal>
 
         </div>
 
         {/* ── Disclaimer ──────────────────────────────────────────── */}
-        <div className=" py-10 flex flex-col gap-4">
+        <Reveal className="py-10 flex flex-col gap-4">
           <p className="font-sans text-m text-[--text-primary] opacity-50 leading-relaxed">
             The content in this template is purely fictional and intended solely for demonstration
             purposes. All information provided is not based on real events, individuals, companies,
@@ -151,27 +160,29 @@ export function Footer() {
             for any decision-making or factual analysis. This template is created for educational
             and re-editing purposes only.
           </p>
-          <p className="font-sans text-m-regular text-[--text-primary] opacity-50 leading-relaxed">
-            The data within should not be considered reliable for real-life application. By using
-            or accessing this template, you acknowledge and agree to these terms. Any reliance on
-            this content is at your own discretion and risk.
-          </p>
-        </div>
+          <Reveal delay={80}>
+            <p className="font-sans text-m-regular text-[--text-primary] opacity-50 leading-relaxed">
+              The data within should not be considered reliable for real-life application. By using
+              or accessing this template, you acknowledge and agree to these terms. Any reliance on
+              this content is at your own discretion and risk.
+            </p>
+          </Reveal>
+        </Reveal>
 
         {/* ── Bottom bar ──────────────────────────────────────────── */}
-        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <Reveal className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="font-sans text-m text-[--text-secondary]">
             Copyright © 2026 Finova
           </span>
-          <div className="flex items-center gap-6">
+          <Reveal delay={80} className="flex items-center gap-6">
             <a href="#" className="font-sans text-m text-[--text-secondary] hover:text-[--text-primary] transition-colors">
               Terms &amp; Condition
             </a>
             <a href="#" className="font-sans text-m text-[--text-secondary] hover:text-[--text-primary] transition-colors">
               Cookies Settings
             </a>
-          </div>
-        </div>
+          </Reveal>
+        </Reveal>
 
       </div>
     </footer>

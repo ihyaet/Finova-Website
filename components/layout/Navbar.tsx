@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { List, X } from '@phosphor-icons/react'
+import { Button } from '@/components/ui/button'
 
 const NAV_LINKS = [
   { label: 'Products',  suffix: '+',  href: '#' },
@@ -162,19 +163,16 @@ export function Navbar() {
               pointerEvents: scrolled ? 'auto' : 'none',
             }}
           >
-            <Link
-              href="/sign-in"
-              className="inline-flex h-[36px] items-center rounded-button border border-white/20 bg-transparent px-4 font-sans text-l text-[--text-secondary] whitespace-nowrap transition-colors hover:border-white/30 hover:bg-white/5"
-            >
-              Sign in / up
-            </Link>
+            <Button asChild variant="secondary" size="sm">
+              <Link href="/sign-in">Sign in / up</Link>
+            </Button>
           </div>
         </div>
 
         {/* External CTA — fades out toward center on scroll */}
-        <Link
-          href="/sign-in"
-          className="inline-flex h-[44px] flex-none items-center whitespace-nowrap rounded-button border border-white/20 bg-transparent px-6 font-sans text-l text-[--text-secondary] transition-colors hover:border-white/30 hover:bg-white/5"
+        <Button
+          asChild
+          variant="secondary"
           style={{
             opacity:     scrolled ? 0 : 1,
             filter:      scrolled ? 'blur(8px)' : 'blur(0px)',
@@ -183,8 +181,8 @@ export function Navbar() {
             pointerEvents: scrolled ? 'none' : 'auto',
           }}
         >
-          Sign in / up
-        </Link>
+          <Link href="/sign-in">Sign in / up</Link>
+        </Button>
       </nav>
 
     </header>

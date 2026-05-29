@@ -1,3 +1,5 @@
+'use client'
+
 const CHECKS = [
   { label: 'KYC verification', status: 'Passed',       color: 'text-green' },
   { label: 'AML screening',    status: 'Clear',         color: 'text-green' },
@@ -11,6 +13,15 @@ const AUDIT_LOG = [
   { text: 'SOC 2 Type II — txn_4kF6J9 requires further investigation',       time: '2 m ago' },
 ]
 
+const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
+
+function fadeIn(delay: number) {
+  return {
+    opacity: 0,
+    animation: `tab-reveal 400ms ${EASE} ${delay}ms both`,
+  }
+}
+
 export function CompliancePreview() {
   return (
     <div
@@ -21,13 +32,18 @@ export function CompliancePreview() {
 
         {/* ── Compliance checks ──────────────────────────────── */}
         <div className="flex flex-col gap-3">
-          <span className="text-[--text-primary] opacity-40"
-            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '16px' }}>Compliance checks</span>
+          <span
+            className="text-[--text-primary] opacity-40"
+            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '16px', ...fadeIn(0) }}
+          >
+            Compliance checks
+          </span>
           <div className="flex flex-col gap-2">
-            {CHECKS.map(({ label, status, color }) => (
+            {CHECKS.map(({ label, status, color }, i) => (
               <div
                 key={label}
                 className="flex items-center justify-between rounded-inner border border-white/20 px-3 py-[10px]"
+                style={fadeIn(60 + i * 60)}
               >
                 <span className="font-sans text-[--text-primary]" style={{ fontSize: '14px' }}>{label}</span>
                 <span className={color} style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '14px' }}>{status}</span>
@@ -40,13 +56,16 @@ export function CompliancePreview() {
         <div className="flex flex-col gap-2 lg:gap-3 flex-1">
           <span
             className="text-[--text-primary] opacity-40 text-[14px] lg:text-[16px]"
-            style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
-          >Recent audit log</span>
+            style={{ fontFamily: 'Consolas, "Courier New", monospace', ...fadeIn(260) }}
+          >
+            Recent audit log
+          </span>
           <div className="flex flex-col gap-1.5 lg:gap-2 flex-1">
-            {AUDIT_LOG.map(({ text, time }) => (
+            {AUDIT_LOG.map(({ text, time }, i) => (
               <div
                 key={text}
                 className="flex items-center gap-2 lg:gap-3 justify-between rounded-[8px] bg-white/5 px-3 py-[6px] lg:py-[10px]"
+                style={fadeIn(320 + i * 60)}
               >
                 <div className="flex items-center gap-2 lg:gap-3 flex-1 min-w-0">
                   <span className="w-1 h-[12px] lg:h-[14px] rounded-[2px] bg-primary-400 shrink-0" />

@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
+
 const SCORE = 46.36
 const R = 100
 const CIRC = 2 * Math.PI * R
@@ -28,8 +30,48 @@ const SEVERITY_COLOR: Record<string, string> = {
   'Very Low': 'text-green',
 }
 
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3)
+}
+
 export function RiskPreview() {
-  const progress = CIRC * (SCORE / 100)
+  const [arcProgress, setArcProgress]     = useState(0)
+  const [signalWidths, setSignalWidths]   = useState<number[]>(SIGNALS.map(() => 0))
+  const [displayScore, setDisplayScore]   = useState(0)
+
+  useEffect(() => {
+    const duration = 1000
+    const start = performance.now()
+
+    const tick = (now: number) => {
+      const elapsed = now - start
+      const t = Math.min(elapsed / duration, 1)
+      const eased = easeOutCubic(t)
+
+      // Gauge arc
+      setArcProgress(CIRC * (SCORE / 100) * eased)
+
+      // Score count-up
+      setDisplayScore(parseFloat((SCORE * eased).toFixed(2)))
+
+      // Signal bars staggered — each bar starts 80ms after previous
+      setSignalWidths(SIGNALS.map((s, i) => {
+        const delay = i * 80
+        const bt = Math.min(Math.max((elapsed - delay) / (duration * 0.8), 0), 1)
+        return s.value * easeOutCubic(bt)
+      }))
+
+      if (t < 1) requestAnimationFrame(tick)
+      else {
+        setArcProgress(CIRC * (SCORE / 100))
+        setDisplayScore(SCORE)
+        setSignalWidths(SIGNALS.map(s => s.value))
+      }
+    }
+
+    const raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [])
 
   return (
     <div
@@ -57,7 +99,7 @@ export function RiskPreview() {
                   stroke="#b2a9db"
                   strokeWidth="13"
                   strokeLinecap="round"
-                  strokeDasharray={`${progress} ${CIRC - progress}`}
+                  strokeDasharray={`${arcProgress} ${CIRC - arcProgress}`}
                   transform="rotate(-90 113 113)"
                 />
               </svg>
@@ -70,7 +112,7 @@ export function RiskPreview() {
                   Overall risk score
                 </span>
                 <div className="flex items-baseline gap-0.5 md:gap-1">
-                  <span className="font-pixel text-h6 md:text-h4 text-[--text-primary]">{SCORE}</span>
+                  <span className="font-pixel text-h6 md:text-h4 text-[--text-primary]">{displayScore.toFixed(2)}</span>
                   <span className="font-sans text-s text-[--text-muted]">/100</span>
                 </div>
               </div>
@@ -85,17 +127,17 @@ export function RiskPreview() {
             >
               Risk signals
             </span>
-            {SIGNALS.map(({ label, value, color }) => (
+            {SIGNALS.map(({ label, color }, i) => (
               <div key={label} className="flex items-center gap-3">
                 <span className="font-sans text-s md:text-m font-medium text-[--text-primary] w-14 md:w-16">{label}</span>
                 <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
                   <div
                     className="h-full rounded-full"
-                    style={{ width: `${value * 100}%`, backgroundColor: color }}
+                    style={{ width: `${signalWidths[i] * 100}%`, backgroundColor: color }}
                   />
                 </div>
                 <span className="font-pixel text-s text-[--text-secondary] w-8 text-right">
-                  {value.toFixed(2)}
+                  {signalWidths[i].toFixed(2)}
                 </span>
               </div>
             ))}
@@ -106,15 +148,16 @@ export function RiskPreview() {
         <div className="hidden md:flex flex-col gap-3 flex-1 min-h-0">
           <span
             className="text-[--text-primary] opacity-40 shrink-0"
-            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '14px' }}
+            style={{ fontFamily: 'Consolas, "Courier New", monospace', fontSize: '14px', opacity: 0, animation: `tab-reveal 400ms cubic-bezier(0.16,1,0.3,1) 0ms both` }}
           >
             Flagged transaction
           </span>
           <div className="flex flex-col gap-2 flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {FLAGGED.map(({ label, severity }) => (
+            {FLAGGED.map(({ label, severity }, i) => (
               <div
                 key={label}
                 className="flex items-center justify-between rounded-[8px] border border-white/10 px-4 py-3 shrink-0"
+                style={{ opacity: 0, animation: `tab-reveal 400ms cubic-bezier(0.16,1,0.3,1) ${60 + i * 60}ms both` }}
               >
                 <span className="font-sans text-m text-[--text-primary]">{label}</span>
                 <span

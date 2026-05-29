@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { Plus, Minus } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
+import { Reveal } from '@/components/ui/Reveal'
+import { TypingBadge } from '@/components/ui/TypingBadge'
 
 const FAQS = [
   {
@@ -39,18 +41,17 @@ export function FAQ() {
           {/* ── Left: badge + heading + CTA ─────────────────────── */}
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-5">
-              <div className="inline-flex w-fit items-center gap-2 bg-primary-400/10 px-3 py-1 rounded-full">
-                <span className="w-1 h-[14px] rounded-[2px] bg-primary-400 shrink-0" />
-                <span className="font-sans text-m font-medium uppercase tracking-widest text-primary-400">
-                  FAQ
-                </span>
-              </div>
-              <h2 className="font-pixel text-[--text-primary] leading-tight">
-                Frequently Asked<br />
-                <span className="text-primary-500">Questions</span>
-              </h2>
+              <TypingBadge text="FAQ" />
+              <Reveal delay={80}>
+                <h2 className="font-pixel text-[--text-primary] leading-tight">
+                  Frequently Asked<br />
+                  <span className="text-primary-500">Questions</span>
+                </h2>
+              </Reveal>
             </div>
-            <Button variant="secondary" className="w-fit">More Questions</Button>
+            <Reveal delay={160}>
+              <Button variant="secondary" className="w-fit">More Questions</Button>
+            </Reveal>
           </div>
 
           {/* ── Right: accordion ────────────────────────────────── */}
@@ -58,8 +59,8 @@ export function FAQ() {
             {FAQS.map(({ question, answer }, i) => {
               const isOpen = openIndex === i
               return (
+                <Reveal key={i} delay={i * 60}>
                 <div
-                  key={i}
                   className="bg-white/10 overflow-hidden transition-all duration-300 ease-in-out"
                   style={{ borderRadius: isOpen ? '12px' : '100px' }}
                 >
@@ -94,6 +95,7 @@ export function FAQ() {
                     </div>
                   </div>
                 </div>
+                </Reveal>
               )
             })}
           </div>

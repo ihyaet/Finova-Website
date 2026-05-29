@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Lightning, Stack, TrendUp, Shield } from '@phosphor-icons/react'
+import { Reveal } from '@/components/ui/Reveal'
+import { TypingBadge } from '@/components/ui/TypingBadge'
 
 interface Feature {
   Icon: React.ElementType
@@ -98,29 +100,23 @@ export function WhyFinova() {
           {/* ── Left features (desktop only) ───────────────────── */}
           <div className="hidden lg:flex flex-col gap-16">
             {LEFT_FEATURES.map((f, i) => (
-              <FeatureCard
-                key={f.title}
-                {...f}
-                active={active === i}
-                onClick={() => setActive(i)}
-              />
+              <Reveal key={f.title} delay={i * 80}>
+                <FeatureCard {...f} active={active === i} onClick={() => setActive(i)} />
+              </Reveal>
             ))}
           </div>
 
           {/* ── Center: badge + heading + illustration ───────────── */}
           <div className="flex flex-col items-center text-center gap-8 order-first lg:order-none">
             <div className="flex flex-col items-center gap-5">
-              <div className="inline-flex w-fit items-center gap-2 bg-primary-400/10 px-3 py-1 rounded-full">
-                <span className="w-1 h-[14px] rounded-[2px] bg-primary-400 shrink-0" />
-                <span className="font-sans text-m font-medium uppercase tracking-widest text-primary-400">
-                  Why Finova
-                </span>
-              </div>
-              <h2 className="font-pixel text-[--text-primary] leading-tight">
-                The Platform Teams<br />
-                Actually{' '}
-                <span className="text-primary-500">Stick With</span>
-              </h2>
+              <TypingBadge text="Why Finova" />
+              <Reveal delay={80}>
+                <h2 className="font-pixel text-[--text-primary] leading-tight">
+                  The Platform Teams<br />
+                  Actually{' '}
+                  <span className="text-primary-500">Stick With</span>
+                </h2>
+              </Reveal>
             </div>
             {/* Illustration with dynamic icon overlay */}
             <div className="relative w-full">
@@ -159,12 +155,9 @@ export function WhyFinova() {
           {/* ── Right features (desktop only) ───────────────────── */}
           <div className="hidden lg:flex flex-col gap-16">
             {RIGHT_FEATURES.map((f, i) => (
-              <FeatureCard
-                key={f.title}
-                {...f}
-                active={active === i + 2}
-                onClick={() => setActive(i + 2)}
-              />
+              <Reveal key={f.title} delay={i * 80}>
+                <FeatureCard {...f} active={active === i + 2} onClick={() => setActive(i + 2)} />
+              </Reveal>
             ))}
           </div>
 

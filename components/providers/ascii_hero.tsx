@@ -173,6 +173,29 @@ export default function AsciiHero({
     };
   }, [update, clearAll]);
 
+  // Ambient flicker — random cells pulse at very low opacity (calm, institutional)
+  useEffect(() => {
+    const pending: ReturnType<typeof setTimeout>[] = []
+    const ticker = setInterval(() => {
+      const cells = cellsRef.current
+      if (!cells.length) return
+      // ~1.5 % of grid at a time
+      const count = Math.max(1, Math.floor(cells.length * 0.015))
+      for (let i = 0; i < count; i++) {
+        const cell = cells[Math.floor(Math.random() * cells.length)]
+        if (!cell) continue
+        cell.style.opacity = (Math.random() * 0.05 + 0.02).toFixed(3)
+        cell.textContent   = pickChar(0.15)
+        const t = setTimeout(
+          () => { if (cell) cell.style.opacity = "0" },
+          Math.random() * 2000 + 600
+        )
+        pending.push(t)
+      }
+    }, 120)
+    return () => { clearInterval(ticker); pending.forEach(clearTimeout) }
+  }, []);
+
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     e.preventDefault();
     update(e.touches[0].clientX, e.touches[0].clientY);

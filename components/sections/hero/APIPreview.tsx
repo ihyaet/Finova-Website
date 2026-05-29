@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 
-const G = '#5DCAA5'                       // green — strings, flags
-const W = 'rgba(255,255,255,0.90)'        // white — commands, keys, numbers
-const D = 'rgba(255,255,255,0.35)'        // dim — punctuation
+const G = '#5DCAA5'
+const W = 'rgba(255,255,255,0.90)'
+const D = 'rgba(255,255,255,0.35)'
 
 type Span = { t: string; c: string }
 type Line = Span[]
@@ -66,9 +66,13 @@ const ENDPOINTS: { method: 'GET' | 'POST'; path: string; lines: Line[] }[] = [
   },
 ]
 
-const METHOD_COLOR: Record<string, string> = {
-  POST: 'text-amber',
-  GET:  'text-green',
+const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
+
+function fadeIn(delay: number) {
+  return {
+    opacity: 0,
+    animation: `tab-reveal 400ms ${EASE} ${delay}ms both`,
+  }
 }
 
 export function APIPreview() {
@@ -88,6 +92,7 @@ export function APIPreview() {
             <div
               key={i}
               className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1 font-sans text-s bg-transparent text-white"
+              style={fadeIn(i * 50)}
             >
               <span className="font-medium">{e.method}</span>
               <span>{e.path}</span>
@@ -98,11 +103,12 @@ export function APIPreview() {
         {/* ── Code block ─────────────────────────────────────── */}
         <div className="flex-1 rounded-inner bg-white/5 p-5 overflow-auto flex items-center justify-start">
           <div
+            key={active}
             className="flex flex-col gap-0 text-[13px] lg:text-[18px]"
             style={{ fontFamily: 'Consolas, "Courier New", monospace', lineHeight: '1.75', letterSpacing: '-0.04em' }}
           >
             {ep.lines.map((line, i) => (
-              <div key={i}>
+              <div key={i} style={fadeIn(i * 40)}>
                 {line.map((span, j) => (
                   <span key={j} style={{ color: span.c }}>{span.t}</span>
                 ))}

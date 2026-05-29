@@ -9,6 +9,7 @@ import {
 } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import AsciiHero from '@/components/providers/ascii_hero'
+import { TypingBadge } from '@/components/ui/TypingBadge'
 import { AnalyticsDashboard } from './AnalyticsDashboard'
 import { APIPreview } from './APIPreview'
 import { CompliancePreview } from './CompliancePreview'
@@ -31,9 +32,12 @@ const TAB_CONTENT: Record<TabId, React.ReactNode> = {
 }
 
 const TAB_DURATION = 12000
+const HERO_EASE    = 'cubic-bezier(0.16, 1, 0.3, 1)'
+const HERO_DUR     = 600
 
 export function Hero() {
-  const [activeTab, setActiveTab] = useState<TabId>('analytics')
+  const [activeTab,   setActiveTab]   = useState<TabId>('analytics')
+  const [heroVisible, setHeroVisible] = useState(false)
 
   // Restart the 12s timer fresh on every tab change — manual or auto
   useEffect(() => {
@@ -46,7 +50,20 @@ export function Hero() {
     return () => clearInterval(timer)
   }, [activeTab])
 
+  // Hero entrance — small delay so opacity:0 is painted before transition fires
+  useEffect(() => {
+    const t = setTimeout(() => setHeroVisible(true), 60)
+    return () => clearTimeout(t)
+  }, [])
+
   const handleTabClick = (id: TabId) => setActiveTab(id)
+
+  // Shared entrance style helper
+  const enter = (delay: number): React.CSSProperties => ({
+    opacity:    heroVisible ? 1 : 0,
+    transform:  heroVisible ? 'translateY(0px)' : 'translateY(12px)',
+    transition: `opacity ${HERO_DUR}ms ${HERO_EASE} ${delay}ms, transform ${HERO_DUR}ms ${HERO_EASE} ${delay}ms`,
+  })
 
   return (
     <AsciiHero className="w-full" bgColor="#07080f">
@@ -57,14 +74,11 @@ export function Hero() {
 
           {/* Left: badge + headline */}
           <div className="flex flex-col gap-5">
-            <div className="inline-flex w-fit items-center gap-2 bg-primary-400/10 px-3 py-1 rounded-full">
-              <span className="w-1 h-[14px] rounded-[2px] bg-primary-400 shrink-0" />
-              <span className="font-sans text-m font-medium uppercase tracking-widest text-primary-400">
-                #1 Financial Architecture Platform
-              </span>
+            <div style={enter(0)}>
+              <TypingBadge text="#1 Financial Architecture Platform" />
             </div>
 
-            <h1 className="font-pixel text-h1-mobile md:text-h1 text-[--text-primary] leading-tight">
+            <h1 style={enter(80)} className="font-pixel text-h1-mobile md:text-h1 text-[--text-primary] leading-tight">
               Powering The<br />
               Future of{' '}
               <span className="text-primary-500">Finance</span>
@@ -72,20 +86,21 @@ export function Hero() {
           </div>
 
           {/* Right: description + CTAs */}
-          <div className="flex flex-col gap-7">
+          <div style={enter(160)} className="flex flex-col gap-7">
             <p className="font-sans text-xl-regular text-[--text-secondary] max-w-full">
               Innovative solutions designed for fintech startups, financial
               consultants, and investment firms seamless, secure, and scalable.
             </p>
             <div className="flex items-center gap-3">
-              <Button variant="primary">Request Demo</Button>
-              <Button variant="secondary">Get Started</Button>
+              <Button variant="primary" asChild><a href="/demo">Request Demo</a></Button>
+              <Button variant="secondary" asChild><a href="/sign-up">Get Started</a></Button>
             </div>
           </div>
         </div>
 
         {/* ── Tab navigation ──────────────────────────────────── */}
         <div
+          style={enter(240)}
           role="tablist"
           aria-label="Product preview"
           className="flex items-center gap-3 py-3 w-full"
@@ -121,7 +136,7 @@ export function Hero() {
         </div>
 
         {/* ── Tab content ─────────────────────────────────────── */}
-        <div className="pt-6 pb-16">
+        <div style={enter(320)} className="pt-6 pb-16">
           {TABS.map(({ id }) => (
             <div
               key={id}
@@ -130,7 +145,9 @@ export function Hero() {
               hidden={activeTab !== id}
               className="h-[440px] md:h-[540px] lg:h-[640px]"
             >
-              {TAB_CONTENT[id]}
+              <div key={activeTab} className="w-full h-full">
+                {TAB_CONTENT[id]}
+              </div>
             </div>
           ))}
         </div>

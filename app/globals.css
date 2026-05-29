@@ -2,6 +2,16 @@
 @import "lenis/dist/lenis.css";
 @config "../tailwind.config.ts";
 
+/* ── Eyebrow typing cursor ─────────────────────────────────── */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.animate-blink-cursor {
+  animation: blink-cursor 0.65s ease-in-out infinite;
+  margin-left: 1px;
+}
+
 /* ── Logo marquee animation ────────────────────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -54,6 +64,15 @@
 }
 .animate-tab-progress {
   animation: tab-progress 12s linear forwards;
+}
+
+/* ── Tab panel reveal (fade + slide up) ────────────────────── */
+@keyframes tab-reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0px); }
+}
+.animate-tab-reveal {
+  animation: tab-reveal 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ── Design Tokens ─────────────────────────────────────────── */

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Reveal } from '@/components/ui/Reveal'
 
 const LOGOS = [
   { src: '/assets/delloitte.svg', alt: 'Deloitte' },
@@ -15,48 +16,28 @@ export function LogoBar() {
   return (
     <section className="w-full py-16">
       <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
-
-        <p className="text-center font-sans text-m text-[--text-muted] mb-10">
-          Trusted by Leading Financial Innovators
-        </p>
-
+        <Reveal>
+          <p className="text-center font-sans text-m text-[--text-muted] mb-10">
+            Trusted by Leading Financial Innovators
+          </p>
+        </Reveal>
       </div>
 
-      {/* Carousel — constrained to same max-width as other sections */}
-      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
-      <div className="relative w-full overflow-hidden">
-
-        {/* Left fade overlay */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32"
-          style={{ background: 'linear-gradient(to right, var(--bg-base), transparent)' }}
-        />
-
-        {/* Right fade overlay */}
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32"
-          style={{ background: 'linear-gradient(to left, var(--bg-base), transparent)' }}
-        />
-
-        {/* Scrolling track — logos duplicated for seamless loop */}
-        {/* pr-16 on each item (not gap) ensures trailing space is included in -50% calculation */}
-        <div className="animate-marquee flex w-max items-center" style={{ willChange: 'transform' }}>
-          {[...LOGOS, ...LOGOS].map(({ src, alt }, i) => (
-            <div
-              key={`${alt}-${i}`}
-              className="flex shrink-0 items-center justify-center pr-16 opacity-40 hover:opacity-70 transition-opacity duration-300"
-            >
-              <Image
-                src={src}
-                alt={alt}
-                width={120}
-                height={32}
-                className="h-8 w-auto object-contain"
-              />
-            </div>
-          ))}
+      <Reveal delay={80} className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px]">
+        <div className="relative w-full overflow-hidden">
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32"
+            style={{ background: 'linear-gradient(to right, var(--bg-base), transparent)' }} />
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32"
+            style={{ background: 'linear-gradient(to left, var(--bg-base), transparent)' }} />
+          <div className="animate-marquee flex w-max items-center" style={{ willChange: 'transform' }}>
+            {[...LOGOS, ...LOGOS].map(({ src, alt }, i) => (
+              <div key={`${alt}-${i}`} className="flex shrink-0 items-center justify-center pr-16 opacity-40 hover:opacity-70 transition-opacity duration-300">
+                <Image src={src} alt={alt} width={120} height={32} className="h-8 w-auto object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      </div>
-
+      </Reveal>
     </section>
   )
 }

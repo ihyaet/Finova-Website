@@ -19,19 +19,21 @@ export function AnnouncementRibbon() {
         hidden ? '-translate-y-full' : 'translate-y-0'
       }`}
     >
-      <div className="w-full px-5 flex items-center justify-center gap-3">
-        <span className="inline-flex items-center rounded-badge bg-white px-2.5 py-0.5 font-sans text-s font-semibold uppercase tracking-wider text-black">
-          Limited
-        </span>
-        <p className="font-sans text-m font-medium text-white/90">
-          Get 3 Months Free On The Growth Plan For Teams Onboarding Before June 30.
-        </p>
-        <Link
-          href="/sign-up"
-          className="hidden sm:inline-flex items-center gap-1 font-sans text-m font-medium text-white transition-opacity hover:opacity-75"
-        >
-          Claim Offer <ArrowRight size={12} aria-hidden="true" />
-        </Link>
+      <div className="w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex items-center justify-center gap-3 px-5 min-w-max mx-auto">
+          <span className="inline-flex items-center rounded-badge bg-white px-2.5 py-0.5 font-sans text-s font-semibold uppercase tracking-wider text-black shrink-0">
+            Limited
+          </span>
+          <p className="font-sans text-m font-medium text-white/90 whitespace-nowrap">
+            Get 3 Months Free On The Growth Plan For Teams Onboarding Before June 30.
+          </p>
+          <Link
+            href="/sign-up"
+            className="inline-flex items-center gap-1 font-sans text-m font-medium text-white transition-opacity hover:opacity-75 shrink-0 whitespace-nowrap"
+          >
+            Claim Offer <ArrowRight size={12} aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </div>
   )
