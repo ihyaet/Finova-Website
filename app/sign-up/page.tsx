@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { EnvelopeSimple, Lock, User, Buildings, Eye, EyeSlash, Lightning, CreditCard, ShieldCheck } from '@phosphor-icons/react'
 import { Reveal } from '@/components/ui/Reveal'
+import { Button } from '@/components/ui/button'
 
 const PERKS = [
   { Icon: Lightning,   text: 'Live in under 2 hours, guaranteed' },
@@ -29,9 +30,14 @@ export default function SignUpPage() {
   const [password,    setPassword]    = useState('')
   const [showPass,    setShowPass]    = useState(false)
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // TODO: wire up sign-up
+  }
+
   return (
-    <div className="flex flex-1 items-start justify-center pt-16 md:pt-20 lg:pt-[120px] pb-16 md:pb-20 lg:pb-[120px] px-5 md:px-10 lg:px-10 xl:px-[140px]">
-      <div className="w-full max-w-[1600px] mx-auto grid lg:grid-cols-2 gap-16 lg:gap-32 items-start">
+    <div className="flex flex-1 items-start justify-center pt-16 md:pt-20 lg:pt-[120px] pb-16 md:pb-20 lg:pb-[120px]">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px] grid lg:grid-cols-2 gap-16 lg:gap-32 items-start">
 
         {/* ── Left: brand panel ─────────────────────────────────── */}
         <Reveal className="hidden lg:flex flex-col gap-10 lg:pt-[120px]">
@@ -73,13 +79,14 @@ export default function SignUpPage() {
           </div>
 
           {/* Google SSO */}
-          <button
+          <Button
             type="button"
-            className="w-full h-[44px] flex items-center justify-center gap-3 rounded-full border border-white/20 bg-transparent font-sans text-l text-[--text-primary] hover:bg-white/5 hover:border-white/30 transition-colors"
+            variant="secondary"
+            className="w-full text-[--text-primary]"
           >
             <GoogleIcon />
             Continue with Google
-          </button>
+          </Button>
 
           {/* Divider */}
           <div className="flex items-center gap-4">
@@ -88,6 +95,7 @@ export default function SignUpPage() {
             <div className="flex-1 h-px bg-white/10" />
           </div>
 
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {/* Full Name */}
           <div className="relative">
             <User
@@ -166,12 +174,9 @@ export default function SignUpPage() {
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            className="w-full h-[44px] rounded-full bg-white font-sans text-l-medium text-base hover:opacity-90 transition-opacity"
-          >
+          <Button type="submit" className="w-full">
             Sign Up
-          </button>
+          </Button>
 
           {/* Terms */}
           <p className="font-sans text-s text-[--text-muted] text-center">
@@ -180,6 +185,7 @@ export default function SignUpPage() {
             {' '}and{' '}
             <Link href="#" className="underline hover:text-[--text-primary] transition-colors">Privacy Policy</Link>
           </p>
+          </form>
 
         </Reveal>
       </div>

@@ -141,7 +141,7 @@ export function Testimonials() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/testi-img.png"
+              src="/assets/testi-img.webp"
               alt="Customer story"
               className="absolute inset-0 w-full h-full object-cover"
             />

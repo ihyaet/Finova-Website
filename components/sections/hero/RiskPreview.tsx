@@ -76,7 +76,7 @@ export function RiskPreview() {
   return (
     <div
       className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:py-12 md:px-20 lg:py-12 lg:px-40"
-      style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
+      style={{ backgroundImage: 'url(/assets/feature-bg.webp)' }}
     >
       <div className="rounded-[12px] bg-primary-dark-500 p-4 md:p-6 w-full h-full flex flex-col items-center justify-center md:flex-row md:items-stretch gap-1 md:gap-8">
 

@@ -362,7 +362,7 @@ export function FeatureValue() {
                   {/* Mobile / tablet inline preview — hidden on desktop */}
                   <div
                     className="block md:hidden rounded-[12px] bg-cover bg-center bg-no-repeat p-5"
-                    style={{ backgroundImage: 'url(/assets/value-bg.png)' }}
+                    style={{ backgroundImage: 'url(/assets/value-bg.webp)' }}
                   >
                     <div className="w-full aspect-square rounded-[12px] bg-primary-dark-500 p-5 flex flex-col items-center justify-center overflow-hidden">
                       <div className="relative w-full">

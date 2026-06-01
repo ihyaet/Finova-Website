@@ -22,16 +22,21 @@ export default function DemoPage() {
   const [teamSize,   setTeamSize]   = useState('')
   const [slot,       setSlot]       = useState<number | null>(null)
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // TODO: wire up booking submission
+  }
+
   return (
     <>
-    <div className="flex flex-1 items-start justify-center pt-16 md:pt-20 lg:pt-[120px] pb-16 md:pb-20 lg:pb-[120px] px-5 md:px-10 lg:px-10 xl:px-[140px]">
-      <div className="w-full max-w-[1600px] mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-start pt-[120px]">
+    <div className="flex flex-1 items-start justify-center pt-[120px] md:pt-20 pb-16 md:pb-20 lg:pb-[120px]">
+      <div className="w-full max-w-[1600px] mx-auto px-5 md:px-10 lg:px-10 xl:px-[140px] grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
         {/* ── Left: Testimonial ─────────────────────────────────── */}
-        <Reveal className="flex flex-col gap-6">
+        <Reveal className="hidden lg:flex flex-col gap-6 lg:pt-[120px] ">
 
           {/* Quote card */}
-          <div className="rounded-[16px] bg-[--bg-surface] border border-white/10 p-6 md:p-8 flex flex-col gap-6">
+          <div className="rounded-[16px] bg-[--bg-surface] border border-white/10 p-6] md:p-8 flex flex-col gap-6">
             <p className="font-sans text-xl text-[--text-primary] leading-relaxed">
               "After thoroughly evaluating six different platforms, we ultimately decided on Finova.
               One of the standout features was the compliance tooling, which proved to be incredibly efficient."
@@ -70,7 +75,8 @@ export default function DemoPage() {
         </Reveal>
 
         {/* ── Right: Booking form ───────────────────────────────── */}
-        <Reveal delay={120} className="flex flex-col gap-6 w-full">
+        <Reveal delay={120} className="flex flex-col gap-6 w-full lg:pt-[120px] md:pt-[120px]">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
 
           {/* Header */}
           <div className="flex flex-col gap-1">
@@ -170,13 +176,11 @@ export default function DemoPage() {
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            className="w-full h-[44px] rounded-full bg-white font-sans text-l-medium text-base hover:opacity-90 transition-opacity"
-          >
+          <Button type="submit" className="w-full">
             Confirm Booking
-          </button>
+          </Button>
 
+        </form>
         </Reveal>
       </div>
 

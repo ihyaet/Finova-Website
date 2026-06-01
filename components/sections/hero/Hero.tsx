@@ -26,9 +26,9 @@ const TABS: { id: TabId; label: string; Icon: React.ElementType }[] = [
 
 const TAB_CONTENT: Record<TabId, React.ReactNode> = {
   analytics: <AnalyticsDashboard />,
-  api: <APIPreview />,
+  api:        <APIPreview />,
   compliance: <CompliancePreview />,
-  risk: <RiskPreview />,
+  risk:       <RiskPreview />,
 }
 
 const TAB_DURATION = 12000
@@ -145,9 +145,11 @@ export function Hero() {
               hidden={activeTab !== id}
               className="h-[440px] md:h-[540px] lg:h-[640px]"
             >
-              <div key={activeTab} className="w-full h-full">
-                {TAB_CONTENT[id]}
-              </div>
+              {activeTab === id && (
+                <div key={activeTab} className="w-full h-full">
+                  {TAB_CONTENT[id]}
+                </div>
+              )}
             </div>
           ))}
         </div>

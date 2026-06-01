@@ -82,21 +82,27 @@ export function APIPreview() {
   return (
     <div
       className="w-full h-full rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:py-12 md:px-20 lg:py-12 lg:px-40"
-      style={{ backgroundImage: 'url(/assets/feature-bg.png)' }}
+      style={{ backgroundImage: 'url(/assets/feature-bg.webp)' }}
     >
       <div className="rounded-[12px] bg-primary-dark-500 p-4 lg:p-6 flex flex-col gap-4 w-full h-full">
 
         {/* ── Endpoint pills ─────────────────────────────────── */}
         <div className="flex items-center gap-2 flex-wrap">
           {ENDPOINTS.map((e, i) => (
-            <div
+            <button
               key={i}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1 font-sans text-s bg-transparent text-white"
+              type="button"
+              onClick={() => setActive(i)}
+              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-sans text-s transition-colors ${
+                active === i
+                  ? 'border-primary-400 bg-primary-400/10 text-white'
+                  : 'border-white/20 bg-transparent text-white/60 hover:border-white/40 hover:text-white'
+              }`}
               style={fadeIn(i * 50)}
             >
               <span className="font-medium">{e.method}</span>
               <span>{e.path}</span>
-            </div>
+            </button>
           ))}
         </div>
 
