@@ -380,7 +380,7 @@ export function FeatureValue() {
               <div className="sticky top-56">
                 <div
                   className="w-full aspect-square rounded-[12px] bg-cover bg-center bg-no-repeat p-4 md:p-6 lg:p-10"
-                  style={{ backgroundImage: 'url(/assets/value-bg.png)' }}
+                  style={{ backgroundImage: 'url(/assets/value-bg.webp)' }}
                 >
                   <div className="w-full h-full rounded-[12px] bg-primary-dark-500 p-4 md:p-6 lg:p-8 m-0 flex flex-col items-center justify-center overflow-hidden">
 
